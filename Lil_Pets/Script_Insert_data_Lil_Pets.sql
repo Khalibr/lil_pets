@@ -50,11 +50,11 @@ INSERT INTO CLIENTE
 -- -- --
 INSERT INTO MASCOTA
 	VALUES
-		(1,1,'Africa','2022-09-19','perro','coker','M',28.997,'NULL'),
+		(1,1,'Africa','2022-09-19','perro','coker','M',18.997,'NULL'),
 		(2,2,'Blue','2022-07-10','gato','azul ruso','F',4.199,'NULL'),
 		(3,3,'Weaver','2022-07-25','conejo','NULL','M',1.321,'NULL'),
 		(4,3,'galapago','2022-09-14','conejo','NULL','F',1.548,'NULL'),
-		(5,4,'Gazer sun','2021-11-28','gato','balinés','F',73.249,'NULL'),
+		(5,4,'Gazer sun','2021-11-28','gato','balinés','F',3.249,'NULL'),
 		(6,5,'Gerbil','2022-10-25','perro','schnauzer','M',15.02,'NULL'),
 		(7,6,'Swan','2021-11-18','hipopotamo','NULL','M',42.078,'NULL'),
 		(8,7,'Desert','2022-07-07','perro','dogo del tíbet','M',38.066,'NULL'),

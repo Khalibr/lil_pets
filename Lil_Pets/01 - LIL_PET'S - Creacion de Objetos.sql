@@ -242,12 +242,12 @@ CREATE FUNCTION `f_calcular_subtotal`(producto INT,cantidad INT) RETURNS DECIMAL
 DETERMINISTIC
 BEGIN
 	DECLARE total DECIMAL(11,2);
-    SET total = (
+	SET total = (
 		SELECT PROD_precioUnitario * cantidad
 		FROM PRODUCTO
 		WHERE PROD_ID = producto
 	);
-    RETURN total;
+	RETURN total;
 END$$
 
 DELIMITER ;
@@ -314,8 +314,8 @@ CREATE OR REPLACE VIEW `cliente_mascotas_view` AS
 (
 	SELECT
 		f_concat_nombre_completo(c.CLI_nombre,c.CLI_apellido) AS nombre_completo_cliente,
-        m.MAS_nombre AS nombre_mascota,
-        m.MAS_especie AS especie       
+		m.MAS_nombre AS nombre_mascota,
+		m.MAS_especie AS especie       
 	FROM
 		CLIENTE AS c
 	JOIN
@@ -329,11 +329,11 @@ CREATE OR REPLACE VIEW `cliente_que_compro_view` AS
 (
 	SELECT
 		c.CLI_ID AS ID,
-        f_concat_nombre_completo(c.CLI_nombre,c.CLI_apellido) AS nombre_completo,
-        p.PED_fechahora AS hora_compra
+		f_concat_nombre_completo(c.CLI_nombre,c.CLI_apellido) AS nombre_completo,
+		p.PED_fechahora AS hora_compra
 	FROM
 		CLIENTE AS c
-    JOIN
+	JOIN
 		PEDIDO AS p ON (c.CLI_ID = p.PED_IDCliente)
 );
 
@@ -345,7 +345,7 @@ CREATE OR REPLACE VIEW `empleado_profesion_view` AS
 (
 	SELECT
 		f_concat_nombre_completo(e.EMP_nombre,e.EMP_apellido) AS nombre_completo,
-        c.CAT_descripcion AS profesion
+		c.CAT_descripcion AS profesion
 	FROM
 		EMPLEADO AS e
 	JOIN
@@ -360,9 +360,9 @@ CREATE OR REPLACE VIEW `productos_view` AS
 	SELECT
 		p.PROD_ID as item,
 		p.PROD_descripcion AS descripcion,
-        c.CAT_descripcion AS categoria,
-        f_concat_precio(p.PROD_precioUnitario) AS costo,
-        pr.PROV_nombre AS proveedor        
+		c.CAT_descripcion AS categoria,
+		f_concat_precio(p.PROD_precioUnitario) AS costo,
+		pr.PROV_nombre AS proveedor        
 	FROM
 		PRODUCTO AS p
 	JOIN
@@ -383,15 +383,15 @@ CREATE OR REPLACE VIEW `servicios_pendientes_view` AS
 (
 	SELECT
 		SPEN_ID AS id,
-        SER_servicio AS servis,
-        f_concat_precio(SER_costo) AS precio,
-        MAS_nombre AS mascota,
-        MAS_raza AS raza,
-        f_concat_nombre_completo(CLI_nombre,CLI_apellido) AS cliente,
-        EMP_nombre AS empleado,
-        CAT_descripcion AS categoria_empleado,
-        SPEN_fechahora AS fecha_hora,
-        SER_descripcion AS descripcion
+		SER_servicio AS servis,
+		f_concat_precio(SER_costo) AS precio,
+		MAS_nombre AS mascota,
+		MAS_raza AS raza,
+		f_concat_nombre_completo(CLI_nombre,CLI_apellido) AS cliente,
+		EMP_nombre AS empleado,
+		CAT_descripcion AS categoria_empleado,
+		SPEN_fechahora AS fecha_hora,
+		SER_descripcion AS descripcion
 	FROM
 		SERVICIO_PENDIENTE
 	JOIN
@@ -429,7 +429,7 @@ BEGIN
 		SET @orden_productos = CONCAT_WS(' ','ORDER BY',campo,orden);
 	ELSE
 		SET @orden_productos = '';
-    END IF;
+	END IF;
     
     -- clausula del select
     SET @clausula = CONCAT_WS(' ','SELECT * FROM PRODUCTO', @orden_productos);
@@ -461,7 +461,7 @@ DROP PROCEDURE IF EXISTS `sp_delete_client`$$
 CREATE PROCEDURE `sp_delete_client` (IN sp_CLI_ID INT)
 BEGIN
 	DELETE
-    FROM
+	FROM
 		CLIENTE
 	WHERE
 		CLI_ID = sp_CLI_ID;

@@ -1,0 +1,110 @@
+
+USE `lil_pets`;
+
+/* 
+-
+• INICIO DE LA CREACION DE TRIGGERS Y TABLAS DE AUDITORIA PARA LA BD `LIL_PET'S`
+-
+*/
+
+
+/*
+	APARTIR DE ESTA TABLA DE AUDITORIA SE PUEDE LLEVAR UN REGISTRO
+    DE TODOS LOS PEDIDOS REALIZADOS, TENIENDO EN CUENTA EL USUARIO Y LA FECHA/HORA
+    DE INSERCION.
+*/
+DROP TABLE IF EXISTS `log_detalle_venta`;
+
+-- CREACION DE LA TABLA "LOG_DETALLE_VENTA" DEL TRIGGER
+CREATE TABLE `log_detalle_venta`
+(
+	log_IDVenta INT PRIMARY KEY,
+    log_IDPedido INT,
+    log_subtotal DECIMAL(11,2),
+    log_recargo INT,
+    log_total DECIMAL(11,2),
+    log_usuario VARCHAR(50),
+    log_evento TIMESTAMP
+);
+
+
+DROP TRIGGER IF EXISTS `tr_detalle_venta`;
+
+-- CREACION DEL TRIGGER
+CREATE TRIGGER `tr_detalle_venta`
+AFTER INSERT ON `DETALLE_VENTA`
+FOR EACH ROW
+INSERT INTO `log_detalle_venta`
+	VALUES
+		(NEW.DET_ID, NEW.DET_IDPedido, NEW.DET_Subtotal, NEW.DET_recargo, NEW.DET_total, SESSION_USER(), CURRENT_TIMESTAMP());
+
+
+
+/*
+	APARTIR DE ESTA TABLA SE AUDITAN TODOS AQUELLOS SERVICIOS QUE SE SOLICITARON
+    DE MANERA QUE, SE LLEVA UN REGISTRO DETALLADO DE LOS MISMOS TENIENDO EN CUENTA
+    CUANDO Y QUE USUARIO REALIZÓ DICHA INSERCION.
+*/
+DROP TABLE IF EXISTS `log_servicio_solicitados`;
+
+-- CREACION DE LA TABLA "LOG_SERVICIO_SOLICITADO" DEL TRIGGER
+CREATE TABLE `log_servicio_solicitados`
+(
+	log_ID INT,
+    log_IDServicio INT,
+    log_IDMascota INT,
+    log_IDEmpleado INT,
+    log_fechahora DATETIME,
+    log_usuario VARCHAR(50),
+    log_evento TIMESTAMP,
+    PRIMARY KEY(log_ID)
+);
+
+
+DROP TRIGGER IF EXISTS  `tr_servicio_solicitados`;
+
+-- CREACION DEL TRIGGER
+CREATE TRIGGER `tr_servicio_solicitados`
+AFTER INSERT ON `SERVICIO_SOLICITADO`
+FOR EACH ROW
+INSERT INTO `log_servicio_solicitados`
+	VALUES
+		(NEW.SOL_ID, NEW.SOL_IDServicio, NEW.SOL_IDMascota, NEW.SOL_IDEmpleado, NEW.SOL_fechahora, SESSION_USER(), CURRENT_TIMESTAMP());
+      
+      
+
+/*
+	APARTIR DE ESTA TABLE SE AUDITAN TODOS AQUELLOS SERVICIOS QUE SE SOLICITARON
+    DE MANERA QUE, SE LLEVA UN REGISTRO DETALLADO DE LOS MISMOS TENIENDO EN CUENTA
+    CUANDO Y QUE USUARIO REALIZÓ DICHA INSERCION.
+*/
+DROP TABLE IF EXISTS `log_precio_antiguo`;
+
+-- CREACION DE LA TABLA "LOG_PRECIO_ANTIGUO" PARA EL TRIGGER
+CREATE TABLE `log_precio_antiguo`
+(
+	log_IDProducto INT,
+    log_IDCategoria INT,
+    log_precioAntiguo DECIMAL(11,2),
+    log_usuario VARCHAR(50),
+    log_evento TIMESTAMP,
+    PRIMARY KEY(log_IDProducto)
+);
+
+
+DROP TRIGGER IF EXISTS `tr_precio_antiguo`;
+
+-- CRECION DEL TRIGGER
+CREATE TRIGGER `tr_precio_antiguo`
+BEFORE UPDATE ON `PRODUCTO`
+FOR EACH ROW
+INSERT INTO `log_precio_antiguo`
+	VALUES
+		(OLD.PROD_ID, OLD.PROD_IDCategoria, OLD.PROD_precioUnitario, SESSION_USER(), CURRENT_TIMESTAMP());
+        
+/*
+update producto
+set PROD_precioUnitario = 5
+where PROD_ID = 1;
+
+select * from producto;*/

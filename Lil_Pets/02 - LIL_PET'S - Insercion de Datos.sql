@@ -18,16 +18,16 @@ USE `Lil_Pets`;
 
 INSERT INTO `CLIENTE`
 	VALUES
-		(1,'Godiva','Meritt','62.885.9423','7 Canary Court','493-713-0830','gmeritt0@ask.com'),
-		(2,'Shannan','Hartup','46.675.9212','500 7th Terrace','428-364-6274','shartup1@bizjournals.com'),
-		(3,'Sylas','Killoran','50.452.8283','7591 Northview Terrace','865-810-2274','skilloran2@twitpic.com'),
-		(4,'Lucita','McMearty','64.513.9633','17046 Springview Hill','415-934-3278','lmcmearty3@sphinn.com'),
-		(5,"Cathryn","Strewther","34.512.2725","6 Valley Edge Parkway","634-251-4734","cstrewther4@reverbnation.com"),
-		(6,'Bradan','Pilgrim','23.536.8198','6737 Grover Terrace','170-966-2226','bpilgrim5@nyu.edu'),
-		(7,'Rufe','Pocke','50.484.2110','4420 Veith Alley','194-451-7397','rpocke6@nbcnews.com'),
-		(8,'Gabriell','McRuvie','30.618.9192','06 Gateway Place','224-963-4213','gmcruvie7@behance.net'),
-		(9,'Conway','Ghio','83.378.3841','797 Sycamore Point','950-472-3357','cghio8@rambler.ru'),
-		(10,'Fannie','De La Cote','25.902.9489','6482 Steensland Point','642-667-2430','fdelacote9@webs.com');
+		(1,'Godiva','Meritt','62.885.923','7 Canary Court','493-713-0830','gmeritt0@ask.com'),
+		(2,'Shannan','Hartup','46.675.912','500 7th Terrace','428-364-6274','shartup1@bizjournals.com'),
+		(3,'Sylas','Killoran','50.452.823','7591 Northview Terrace','865-810-2274','skilloran2@twitpic.com'),
+		(4,'Lucita','McMearty','64.513.963','17046 Springview Hill','415-934-3278','lmcmearty3@sphinn.com'),
+		(5,"Cathryn","Strewther","34.512.275","6 Valley Edge Parkway","634-251-4734","cstrewther4@reverbnation.com"),
+		(6,'Bradan','Pilgrim','23.536.818','6737 Grover Terrace','170-966-2226','bpilgrim5@nyu.edu'),
+		(7,'Rufe','Pocke','50.484.211','4420 Veith Alley','194-451-7397','rpocke6@nbcnews.com'),
+		(8,'Gabriell','McRuvie','30.618.919','06 Gateway Place','224-963-4213','gmcruvie7@behance.net'),
+		(9,'Conway','Ghio','83.378.384','797 Sycamore Point','950-472-3357','cghio8@rambler.ru'),
+		(10,'Fannie','De La Cote','25.902.948','6482 Steensland Point','642-667-2430','fdelacote9@webs.com');
 
 
 -- Estructura para insertar registros en `MASCOTA`
@@ -52,17 +52,17 @@ INSERT INTO `MASCOTA`
 INSERT INTO `CATEGORIA_EMPLEADO`
 	VALUES
 		(1,'Atencion Medica'),
-		(2,'Estilista de mascotas'),
-		(3,'Atencion en ventas');
+		(2,'Estilista de mascotas');
 
 
 -- Estructura para insertar registros en `EMPLEADO`
 
 INSERT INTO `EMPLEADO`
 	VALUES
-		(1,1,'Edgar','Flores','Masculino','64.474.4680','756-788-1519','1987-10-05',100000.00,'2021-05-31'),
-		(2,2,'Maria','Taler','Femenino','67.607.4835','341-341-0660','2000-12-27',50000.00,'2021-03-24'),
-		(3,3,'Emanuel','Isba','Masculino','75.706.8187','537-880-8516','1994-03-15',30000.00,'2020-05-10');
+		(1,1,'Edgar','Flores','Masculino','64.474.460','756-788-1519','1987-10-05',100000.00,'2021-05-31'),
+		(2,2,'Maria','Taler','Femenino','67.607.435','341-341-0660','2000-12-27',50000.00,'2021-03-24'),
+		(3,1,'Emanuel','Isba','Masculino','75.706.887','537-880-8516','1994-03-15',100000.00,'2020-05-10'),
+        (4,2,'Nanda','Waler','Femenino','68.657.445','321-371-0610','1999-12-17',50000.00,'2019-07-30');
 
 
 -- Estructura para insertar registros en `SERVICIO`
@@ -77,18 +77,18 @@ INSERT INTO `SERVICIO`
 		(6,'Peluqueria','Baño completo',7500,'Incluye baño, secado, peinado, limpieza de oídos y corte de uñas'),
 		(7,'Peluqueria','Cortes de Raza',7000,'Schnauzer, Caniche, Cocker, Pastor Alemán, Pastor Inglé, otras razas'),
 		(8,'Peluqueria','Limpieza de oidos',3500,'Servicio canino'),
-		(9,'Peluqueria','Corte de uñas',2500,'Servicio canino y felino'),
-		(10,'Ventas','Atencion',10,'Atencion al publico');
+		(9,'Peluqueria','Corte de uñas',2500,'Servicio canino y felino');
 
 
--- Estructura para insertar registros en `SERVICIO_PENDIENTE`
+-- Estructura para insertar registros en `SERVICIO_SOLICITADO`
      
-INSERT INTO `SERVICIO_PENDIENTE`
+INSERT INTO `SERVICIO_SOLICITADO`
 	VALUES
-		(1,7,1,1,'2022-10-31 11:00'),
-		(2,4,4,1,'2022-11-02 19:00'),
-		(3,1,11,2,'2022-11-03 16:15'),
-		(4,4,7,2,'2022-11-01 15:30');
+		(1,7,1,2,'2022-10-31 11:00'),
+		(2,4,3,3,'2022-11-02 19:00'),
+		(3,1,11,1,'2022-11-03 16:15'),
+		(4,2,4,3,'2022-11-01 15:30'),
+        (5,9,10,4,'2022-11-01 15:30');
 
 
 -- Estructura para insertar registros en `HISTORIAL`
@@ -102,7 +102,7 @@ INSERT INTO `HISTORIAL`
 
 INSERT INTO `PEDIDO`
 	VALUES
-		(1,3,'2022-03-17 06:08:15'),
+		(1,3,DEFAULT),
 		(2,7,'2022-01-11 16:59:31'),
 		(3,5,'2022-04-13 18:46:32'),
 		(4,1,'2022-08-17 18:48:50');

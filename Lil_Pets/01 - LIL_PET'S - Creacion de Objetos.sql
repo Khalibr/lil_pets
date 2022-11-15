@@ -266,8 +266,8 @@ CREATE OR REPLACE VIEW `mas_vendido` AS
 (
 	SELECT
 		d.DET_IDProducto AS item,
-        p.PROD_descripcion AS producto,
-        d.DET_cantidad AS cantidad
+		p.PROD_descripcion AS producto,
+		d.DET_cantidad AS cantidad
 	FROM
 		DETALLE_VENTA AS d
 	JOIN
@@ -348,7 +348,7 @@ CREATE OR REPLACE VIEW `top10_clientes_view` AS
 	SELECT
 		c.CLI_ID AS ID,
 		f_concat_nombre_completo(c.CLI_nombre,c.CLI_apellido) AS nombre_completo,
-        COUNT(p.PED_IDCliente) AS compras_realizadas
+		COUNT(p.PED_IDCliente) AS compras_realizadas
 	FROM
 		CLIENTE AS c
 	JOIN
@@ -477,7 +477,7 @@ CREATE OR REPLACE VIEW `ganancia_servicios` AS
 	SELECT
 		MONTHNAME(soli.SOL_fechahora) as mes,
 		SUM(serv.SER_costo) AS ganancia,
-        COUNT(soli.SOL_IDServicio) AS 'cantidad solicitados'
+		COUNT(soli.SOL_IDServicio) AS 'cantidad solicitados'
 	FROM
 		SERVICIO AS serv
 	JOIN
@@ -587,12 +587,12 @@ DROP TABLE IF EXISTS `log_detalle_venta`;
 CREATE TABLE `log_detalle_venta`
 (
 	log_IDVenta INT PRIMARY KEY,
-    log_IDPedido INT,
-    log_subtotal DECIMAL(11,2),
-    log_recargo INT,
-    log_total DECIMAL(11,2),
-    log_usuario VARCHAR(50),
-    log_evento TIMESTAMP
+	log_IDPedido INT,
+	log_subtotal DECIMAL(11,2),
+	log_recargo INT,
+	log_total DECIMAL(11,2),
+	log_usuario VARCHAR(50),
+	log_evento TIMESTAMP
 );
 
 
@@ -619,13 +619,13 @@ DROP TABLE IF EXISTS `log_servicio_solicitados`;
 CREATE TABLE `log_servicio_solicitados`
 (
 	log_ID INT,
-    log_IDServicio INT,
-    log_IDMascota INT,
-    log_IDEmpleado INT,
-    log_fechahora DATETIME,
-    log_usuario VARCHAR(50),
-    log_evento TIMESTAMP,
-    PRIMARY KEY(log_ID)
+	log_IDServicio INT,
+	log_IDMascota INT,
+	log_IDEmpleado INT,
+	log_fechahora DATETIME,
+	log_usuario VARCHAR(50),
+	log_evento TIMESTAMP,
+	PRIMARY KEY(log_ID)
 );
 
 
@@ -652,11 +652,11 @@ DROP TABLE IF EXISTS `log_precio_antiguo`;
 CREATE TABLE `log_precio_antiguo`
 (
 	log_IDProducto INT,
-    log_IDCategoria INT,
-    log_precioAntiguo DECIMAL(11,2),
-    log_usuario VARCHAR(50),
-    log_evento TIMESTAMP,
-    PRIMARY KEY(log_IDProducto)
+	log_IDCategoria INT,
+	log_precioAntiguo DECIMAL(11,2),
+	log_usuario VARCHAR(50),
+	log_evento TIMESTAMP,
+	PRIMARY KEY(log_IDProducto)
 );
 
 

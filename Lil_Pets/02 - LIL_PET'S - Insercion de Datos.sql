@@ -127,8 +127,8 @@ INSERT INTO `PROVEEDOR`
 		(2,'Ferry Group','53.130.7404','724-237-5613','mokie1@deviantart.com','7 4th Parkway','lycos.com');
 
 
--- Estructura para insertar registros en `CATEGORIA_ANIMAL`
-INSERT INTO `CATEGORIA_ANIMAL`
+-- Estructura para insertar registros en `SUBCATEGORIA_PRODUCTO`
+INSERT INTO `SUBCATEGORIA_PRODUCTO`
 	VALUES
 	(1,'Perro','generalizar en cualquier producto para perros, excepto alimento'),
 	(2,'Gato','generalizar en cualquier producto para gatos, excepto alimento'),

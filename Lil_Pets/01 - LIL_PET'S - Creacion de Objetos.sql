@@ -162,9 +162,9 @@ CREATE TABLE IF NOT EXISTS `PROVEEDOR`(
 
 CREATE TABLE IF NOT EXISTS `SUBCATEGORIA_PRODUCTO`(
 	SUB_ID INT NOT NULL AUTO_INCREMENT,
-    SUB_especieEdad VARCHAR(50) NOT NULL,
-    SUB_descripcion VARCHAR(140) NOT NULL,
-    PRIMARY KEY(SUB_ID)
+	SUB_especieEdad VARCHAR(50) NOT NULL,
+	SUB_descripcion VARCHAR(140) NOT NULL,
+	PRIMARY KEY(SUB_ID)
 );
 
 -- Estructura para la tabla `PRODUCTO`
@@ -173,13 +173,13 @@ CREATE TABLE IF NOT EXISTS `PRODUCTO`(
 	PROD_ID INT NOT NULL AUTO_INCREMENT,    
 	PROD_descripcion VARCHAR(140) NOT NULL,
 	PROD_IDCategoria INT NOT NULL,
-    PROD_IDSubcategoria INT NOT NULL,
+	PROD_IDSubcategoria INT NOT NULL,
 	PROD_precioUnitario DECIMAL(11,2) NOT NULL,
 	PROD_IDProveedor INT NOT NULL,
 	PRIMARY KEY(PROD_ID),
 	CONSTRAINT fk_id_categoria_producto FOREIGN KEY(PROD_IDCategoria) REFERENCES CATEGORIA_PRODUCTO(CAT_IDProducto) ON DELETE CASCADE,
 	CONSTRAINT fk_id_proveedor_producto FOREIGN KEY(PROD_IDProveedor) REFERENCES PROVEEDOR(PROV_ID) ON DELETE CASCADE,
-    CONSTRAINT fk_id_subcategoria_producto FOREIGN KEY(PROD_IDSubcategoria) REFERENCES SUBCATEGORIA_PRODUCTO(SUB_ID) ON DELETE CASCADE
+	CONSTRAINT fk_id_subcategoria_producto FOREIGN KEY(PROD_IDSubcategoria) REFERENCES SUBCATEGORIA_PRODUCTO(SUB_ID) ON DELETE CASCADE
 );
 
 
@@ -348,9 +348,9 @@ CREATE OR REPLACE VIEW `productos_gatos_view` AS
 (
 	SELECT
 		p.PROD_descripcion AS item,
-        catpro.CAT_descripcion AS 'categoria producto',
-        a.SUB_especieEdad AS 'subcategoria producto',
-        f_concat_precio(p.PROD_precioUnitario) AS costo
+		catpro.CAT_descripcion AS 'categoria producto',
+		a.SUB_especieEdad AS 'subcategoria producto',
+		f_concat_precio(p.PROD_precioUnitario) AS costo
 	FROM
 		PRODUCTO AS p
 	JOIN
@@ -371,9 +371,9 @@ CREATE OR REPLACE VIEW `productos_perros_view` AS
 (
 	SELECT
 		p.PROD_descripcion AS item,
-        catpro.CAT_descripcion AS 'categoria producto',
-        a.SUB_especieEdad AS 'subcategoria producto',
-        f_concat_precio(p.PROD_precioUnitario) AS costo
+		catpro.CAT_descripcion AS 'categoria producto',
+		a.SUB_especieEdad AS 'subcategoria producto',
+		f_concat_precio(p.PROD_precioUnitario) AS costo
 	FROM
 		PRODUCTO AS p
 	JOIN
@@ -432,7 +432,7 @@ CREATE OR REPLACE VIEW `productos_view` AS
 		p.PROD_ID as item,
 		p.PROD_descripcion AS descripcion,
 		c.CAT_descripcion AS categoria,
-        a.SUB_especieEdad AS para,
+		a.SUB_especieEdad AS para,
 		f_concat_precio(p.PROD_precioUnitario) AS costo,
 		pr.PROV_nombre AS proveedor        
 	FROM

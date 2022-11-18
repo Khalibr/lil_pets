@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `HISTORIAL`(
 CREATE TABLE IF NOT EXISTS `PEDIDO`(
 	PED_ID INT NOT NULL AUTO_INCREMENT,
 	PED_IDCliente INT NOT NULL,
-	PED_fechahora TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	PED_fechahora TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(PED_ID),
 	CONSTRAINT fk_id_cliente_pedido FOREIGN KEY(PED_IDCliente) REFERENCES CLIENTE(CLI_ID) ON DELETE CASCADE
 );
@@ -158,17 +158,28 @@ CREATE TABLE IF NOT EXISTS `PROVEEDOR`(
 );
 
 
+-- Estructura para la tabla `SUBCATEGORIA_PRODUCTO`
+
+CREATE TABLE IF NOT EXISTS `SUBCATEGORIA_PRODUCTO`(
+	SUB_ID INT NOT NULL AUTO_INCREMENT,
+    SUB_especieEdad VARCHAR(50) NOT NULL,
+    SUB_descripcion VARCHAR(140) NOT NULL,
+    PRIMARY KEY(SUB_ID)
+);
+
 -- Estructura para la tabla `PRODUCTO`
 
 CREATE TABLE IF NOT EXISTS `PRODUCTO`(
 	PROD_ID INT NOT NULL AUTO_INCREMENT,    
 	PROD_descripcion VARCHAR(140) NOT NULL,
 	PROD_IDCategoria INT NOT NULL,
+    PROD_IDSubcategoria INT NOT NULL,
 	PROD_precioUnitario DECIMAL(11,2) NOT NULL,
 	PROD_IDProveedor INT NOT NULL,
 	PRIMARY KEY(PROD_ID),
 	CONSTRAINT fk_id_categoria_producto FOREIGN KEY(PROD_IDCategoria) REFERENCES CATEGORIA_PRODUCTO(CAT_IDProducto) ON DELETE CASCADE,
-	CONSTRAINT fk_id_proveedor_producto FOREIGN KEY(PROD_IDProveedor) REFERENCES PROVEEDOR(PROV_ID) ON DELETE CASCADE
+	CONSTRAINT fk_id_proveedor_producto FOREIGN KEY(PROD_IDProveedor) REFERENCES PROVEEDOR(PROV_ID) ON DELETE CASCADE,
+    CONSTRAINT fk_id_subcategoria_producto FOREIGN KEY(PROD_IDSubcategoria) REFERENCES SUBCATEGORIA_PRODUCTO(SUB_ID) ON DELETE CASCADE
 );
 
 
@@ -185,6 +196,59 @@ CREATE TABLE IF NOT EXISTS `DETALLE_VENTA`(
 	PRIMARY KEY(DET_ID),
 	CONSTRAINT fk_id_pedido_d_venta FOREIGN KEY(DET_IDPedido) REFERENCES PEDIDO(PED_ID) ON DELETE CASCADE,
 	CONSTRAINT fk_id_producto_d_venta FOREIGN KEY(DET_IDProducto) REFERENCES PRODUCTO(PROD_ID) ON DELETE CASCADE
+);
+
+
+
+/* 
+-
+• INICIO DE LA CREACION DE TABLAS DE AUDITORIA PARA LA BD `LIL_PET'S`
+-
+*/
+
+-- CREACION DE LA TABLA "LOG_DETALLE_VENTA" DEL TRIGGER
+
+CREATE TABLE IF NOT EXISTS  `log_detalle_venta`
+(
+	log_evento VARCHAR(50),
+	log_IDVenta INT,
+	log_IDPedido INT,
+	log_subtotal DECIMAL(11,2),
+	log_recargo INT,
+	log_total DECIMAL(11,2),
+	log_usuario VARCHAR(50),
+	log_fechahora TIMESTAMP,
+    PRIMARY KEY (log_IDVenta)
+);
+
+
+-- CREACION DE LA TABLA "LOG_SERVICIO_SOLICITADO" DEL TRIGGER
+
+CREATE TABLE IF NOT EXISTS `log_servicio_solicitados`
+(
+	log_evento VARCHAR(50),
+	log_ID INT,
+	log_IDServicio INT,
+	log_IDMascota INT,
+	log_IDEmpleado INT,
+	log_fechahora_cita DATETIME,
+	log_usuario VARCHAR(50),
+	log_fechahora TIMESTAMP,
+	PRIMARY KEY(log_ID)
+);
+
+
+-- CREACION DE LA TABLA "LOG_PRECIO_ANTIGUO" PARA EL TRIGGER
+
+CREATE TABLE IF NOT EXISTS `log_precio_antiguo`
+(
+	log_evento VARCHAR(50),
+	log_IDProducto INT,
+	log_IDCategoria INT,
+	log_precioAntiguo DECIMAL(11,2),
+	log_usuario VARCHAR(50),
+	log_fechahora TIMESTAMP,
+	PRIMARY KEY(log_IDProducto)
 );
 
 
@@ -262,7 +326,7 @@ DELIMITER ;
 
 
 -- VISTA DE LOS PRODUCTOS MAS VENDIDOS
-CREATE OR REPLACE VIEW `mas_vendido` AS
+CREATE OR REPLACE VIEW `mas_vendido_view` AS
 (
 	SELECT
 		d.DET_IDProducto AS item,
@@ -283,30 +347,21 @@ CREATE OR REPLACE VIEW `mas_vendido` AS
 CREATE OR REPLACE VIEW `productos_gatos_view` AS
 (
 	SELECT
-		p.PROD_descripcion AS items,
-		f_concat_precio(p.PROD_precioUnitario) AS costo_compra
+		p.PROD_descripcion AS item,
+        catpro.CAT_descripcion AS 'categoria producto',
+        a.SUB_especieEdad AS 'subcategoria producto',
+        f_concat_precio(p.PROD_precioUnitario) AS costo
 	FROM
 		PRODUCTO AS p
+	JOIN
+		CATEGORIA_PRODUCTO AS catpro ON (catpro.CAT_IDProducto = p.PROD_IDCategoria)
+	JOIN
+		SUBCATEGORIA_PRODUCTO AS a ON (a.SUB_ID = p.PROD_IDSubcategoria)
 	WHERE
-		p.PROD_descripcion like upper('%gato%')
+		a.SUB_especieEdad LIKE upper('%gat%')
 	ORDER BY
-		p.PROD_precioUnitario DESC
-);
-
-
--- VISTA DE LOS PRODUCTOS PARA GATITOS
-
-CREATE OR REPLACE VIEW `productos_gatitos_view` AS
-(
-	SELECT
-		p.PROD_descripcion AS items,
-		f_concat_precio(p.PROD_precioUnitario) AS costo_unitario
-	FROM
-		PRODUCTO AS p
-	WHERE
-		p.PROD_descripcion like upper('%gatito%')
-	ORDER BY
-		p.PROD_precioUnitario DESC
+		catpro.CAT_descripcion ASC,
+		a.SUB_especieEdad DESC
 );
 
 
@@ -315,14 +370,22 @@ CREATE OR REPLACE VIEW `productos_gatitos_view` AS
 CREATE OR REPLACE VIEW `productos_perros_view` AS
 (
 	SELECT
-		p.PROD_descripcion AS items,
-		f_concat_precio(p.PROD_precioUnitario) AS costo
+		p.PROD_descripcion AS item,
+        catpro.CAT_descripcion AS 'categoria producto',
+        a.SUB_especieEdad AS 'subcategoria producto',
+        f_concat_precio(p.PROD_precioUnitario) AS costo
 	FROM
 		PRODUCTO AS p
+	JOIN
+		SUBCATEGORIA_PRODUCTO AS a ON (a.SUB_ID = p.PROD_IDSubcategoria)
+	JOIN
+		CATEGORIA_PRODUCTO AS catpro ON (catpro.CAT_IDProducto = p.PROD_IDCategoria)
 	WHERE
-		p.PROD_descripcion like upper('%perro%')
+		a.SUB_especieEdad LIKE upper('%perr%')
+        OR a.SUB_especieEdad LIKE upper('%cach%')
 	ORDER BY
-		p.PROD_precioUnitario DESC
+		catpro.CAT_descripcion ASC,
+		a.SUB_especieEdad DESC
 );
 
 
@@ -361,21 +424,6 @@ CREATE OR REPLACE VIEW `top10_clientes_view` AS
 );
 
 
-
--- VISTA DE EMPLEADOS JUNTO CON SU PROFESION
-
-CREATE OR REPLACE VIEW `empleado_profesion_view` AS
-(
-	SELECT
-		f_concat_nombre_completo(e.EMP_nombre,e.EMP_apellido) AS nombre_completo,
-		c.CAT_descripcion AS profesion
-	FROM
-		EMPLEADO AS e
-	JOIN
-		CATEGORIA_EMPLEADO AS c ON(e.EMP_ID = c.CAT_IDEmpleado)
-);
-
-
 -- VISTA CON MULTIPLE JOIN'S DE LA TABLA `PRODUCTO`, DONDE SE REEMPLAZAN LAS FK POR SU NOMBRE/DESCRIPCION DE TABLAS RELACIONADAS
 
 CREATE OR REPLACE VIEW `productos_view` AS
@@ -384,6 +432,7 @@ CREATE OR REPLACE VIEW `productos_view` AS
 		p.PROD_ID as item,
 		p.PROD_descripcion AS descripcion,
 		c.CAT_descripcion AS categoria,
+        a.SUB_especieEdad AS para,
 		f_concat_precio(p.PROD_precioUnitario) AS costo,
 		pr.PROV_nombre AS proveedor        
 	FROM
@@ -392,6 +441,8 @@ CREATE OR REPLACE VIEW `productos_view` AS
 		CATEGORIA_PRODUCTO AS c ON (p.PROD_IDCategoria = c.CAT_IDProducto)
 	JOIN
 		PROVEEDOR AS pr ON (p.PROD_IDProveedor = pr.PROV_ID)
+	JOIN
+		SUBCATEGORIA_PRODUCTO AS a ON (p.PROD_IDSubcategoria = a.SUB_ID)
 	WHERE
 		p.PROD_ID
 	ORDER BY
@@ -451,7 +502,7 @@ CREATE OR REPLACE VIEW `servicios_mas_solicitados_view` AS
 
 -- VISTA DE LA GANANCIA MENSUAL DE VENTAS DEL AÑO 2022
 
-CREATE OR REPLACE VIEW `ganancias_x_mes` AS
+CREATE OR REPLACE VIEW `ganancias_x_mes_view` AS
 (
 	SELECT
 		d.DET_IDPedido AS IDPEDIDO,
@@ -472,7 +523,7 @@ CREATE OR REPLACE VIEW `ganancias_x_mes` AS
 
 -- VISTA DE GANANCIAS MENSUALES DE LOS SERVICIOS REALIZADOS DEL AÑO 2022
 
-CREATE OR REPLACE VIEW `ganancia_servicios` AS
+CREATE OR REPLACE VIEW `ganancia_servicios_view` AS
 (
 	SELECT
 		MONTHNAME(soli.SOL_fechahora) as mes,
@@ -551,6 +602,54 @@ BEGIN
 		CLI_ID = sp_CLI_ID;
 END$$
 
+
+
+/* 
+-
+• INICIO DE LA CREACION DE TRIGGERS DE AUDITORIA PARA LA BD `LIL_PET'S`
+-
+*/
+
+
+
+DROP TRIGGER IF EXISTS `tr_detalle_venta`$$
+
+-- CREACION DEL TRIGGER
+CREATE TRIGGER `tr_detalle_venta`
+AFTER INSERT ON `DETALLE_VENTA`
+FOR EACH ROW
+BEGIN
+	INSERT INTO `log_detalle_venta`
+		VALUES
+		('Nueva venta',NEW.DET_ID, NEW.DET_IDPedido, NEW.DET_Subtotal, NEW.DET_recargo, NEW.DET_total, SESSION_USER(), CURRENT_TIMESTAMP());
+END$$
+
+
+DROP TRIGGER IF EXISTS  `tr_servicio_solicitados`$$
+
+-- CREACION DEL TRIGGER
+CREATE TRIGGER `tr_servicio_solicitados`
+AFTER INSERT ON `SERVICIO_SOLICITADO`
+FOR EACH ROW
+BEGIN
+	INSERT INTO `log_servicio_solicitados`
+		VALUES
+		('Servicio solicitado',NEW.SOL_ID, NEW.SOL_IDServicio, NEW.SOL_IDMascota, NEW.SOL_IDEmpleado, NEW.SOL_fechahora, SESSION_USER(), CURRENT_TIMESTAMP());
+END$$      
+      
+
+DROP TRIGGER IF EXISTS `tr_precio_antiguo`$$
+
+-- CRECION DEL TRIGGER
+CREATE TRIGGER `tr_precio_antiguo`
+BEFORE UPDATE ON `PRODUCTO`
+FOR EACH ROW
+BEGIN
+	INSERT INTO `log_precio_antiguo`
+		VALUES
+		('Producto modificado',OLD.PROD_ID, OLD.PROD_IDCategoria, OLD.PROD_precioUnitario, SESSION_USER(), CURRENT_TIMESTAMP());
+END$$
+
 DELIMITER ;
 
 /*
@@ -565,114 +664,3 @@ SELECT * FROM CLIENTE;
 call lil_pets.sp_delete_client(11);
 SELECT * FROM CLIENTE;
 */
-
-
-
-
-/* 
--
-• INICIO DE LA CREACION DE TRIGGERS Y TABLAS DE AUDITORIA PARA LA BD `LIL_PET'S`
--
-*/
-
-
-/*
-	APARTIR DE ESTA TABLA DE AUDITORIA SE PUEDE LLEVAR UN REGISTRO
-    DE TODOS LOS PEDIDOS REALIZADOS, TENIENDO EN CUENTA EL USUARIO Y LA FECHA/HORA
-    DE INSERCION.
-*/
-DROP TABLE IF EXISTS `log_detalle_venta`;
-
--- CREACION DE LA TABLA "LOG_DETALLE_VENTA" DEL TRIGGER
-CREATE TABLE `log_detalle_venta`
-(
-	log_IDVenta INT PRIMARY KEY,
-	log_IDPedido INT,
-	log_subtotal DECIMAL(11,2),
-	log_recargo INT,
-	log_total DECIMAL(11,2),
-	log_usuario VARCHAR(50),
-	log_evento TIMESTAMP
-);
-
-
-DROP TRIGGER IF EXISTS `tr_detalle_venta`;
-
--- CREACION DEL TRIGGER
-CREATE TRIGGER `tr_detalle_venta`
-AFTER INSERT ON `DETALLE_VENTA`
-FOR EACH ROW
-INSERT INTO `log_detalle_venta`
-	VALUES
-		(NEW.DET_ID, NEW.DET_IDPedido, NEW.DET_Subtotal, NEW.DET_recargo, NEW.DET_total, SESSION_USER(), CURRENT_TIMESTAMP());
-
-
-
-/*
-	APARTIR DE ESTA TABLA SE AUDITAN TODOS AQUELLOS SERVICIOS QUE SE SOLICITARON
-    DE MANERA QUE, SE LLEVA UN REGISTRO DETALLADO DE LOS MISMOS TENIENDO EN CUENTA
-    CUANDO Y QUE USUARIO REALIZÓ DICHA INSERCION.
-*/
-DROP TABLE IF EXISTS `log_servicio_solicitados`;
-
--- CREACION DE LA TABLA "LOG_SERVICIO_SOLICITADO" DEL TRIGGER
-CREATE TABLE `log_servicio_solicitados`
-(
-	log_ID INT,
-	log_IDServicio INT,
-	log_IDMascota INT,
-	log_IDEmpleado INT,
-	log_fechahora DATETIME,
-	log_usuario VARCHAR(50),
-	log_evento TIMESTAMP,
-	PRIMARY KEY(log_ID)
-);
-
-
-DROP TRIGGER IF EXISTS  `tr_servicio_solicitados`;
-
--- CREACION DEL TRIGGER
-CREATE TRIGGER `tr_servicio_solicitados`
-AFTER INSERT ON `SERVICIO_SOLICITADO`
-FOR EACH ROW
-INSERT INTO `log_servicio_solicitados`
-	VALUES
-		(NEW.SOL_ID, NEW.SOL_IDServicio, NEW.SOL_IDMascota, NEW.SOL_IDEmpleado, NEW.SOL_fechahora, SESSION_USER(), CURRENT_TIMESTAMP());
-      
-      
-
-/*
-	APARTIR DE ESTA TABLE SE AUDITAN TODOS AQUELLOS SERVICIOS QUE SE SOLICITARON
-    DE MANERA QUE, SE LLEVA UN REGISTRO DETALLADO DE LOS MISMOS TENIENDO EN CUENTA
-    CUANDO Y QUE USUARIO REALIZÓ DICHA INSERCION.
-*/
-DROP TABLE IF EXISTS `log_precio_antiguo`;
-
--- CREACION DE LA TABLA "LOG_PRECIO_ANTIGUO" PARA EL TRIGGER
-CREATE TABLE `log_precio_antiguo`
-(
-	log_IDProducto INT,
-	log_IDCategoria INT,
-	log_precioAntiguo DECIMAL(11,2),
-	log_usuario VARCHAR(50),
-	log_evento TIMESTAMP,
-	PRIMARY KEY(log_IDProducto)
-);
-
-
-DROP TRIGGER IF EXISTS `tr_precio_antiguo`;
-
--- CRECION DEL TRIGGER
-CREATE TRIGGER `tr_precio_antiguo`
-BEFORE UPDATE ON `PRODUCTO`
-FOR EACH ROW
-INSERT INTO `log_precio_antiguo`
-	VALUES
-		(OLD.PROD_ID, OLD.PROD_IDCategoria, OLD.PROD_precioUnitario, SESSION_USER(), CURRENT_TIMESTAMP());
-        
-/*
-update producto
-set PROD_precioUnitario = 5
-where PROD_ID = 1;
-
-select * from producto;*/

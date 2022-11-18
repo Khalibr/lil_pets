@@ -127,47 +127,59 @@ INSERT INTO `PROVEEDOR`
 		(2,'Ferry Group','53.130.7404','724-237-5613','mokie1@deviantart.com','7 4th Parkway','lycos.com');
 
 
+-- Estructura para insertar registros en `CATEGORIA_ANIMAL`
+INSERT INTO `CATEGORIA_ANIMAL`
+	VALUES
+	(1,'Perro','generalizar en cualquier producto para perros, excepto alimento'),
+	(2,'Gato','generalizar en cualquier producto para gatos, excepto alimento'),
+	(3,'Perro Adulto','Utilizado para diferenciar en alimentos'),
+	(4,'Cachorro','Utilizado para diferenciar en alimentos'),
+	(5,'Gato Adulto','Utilizado para diferenciar en alimentos'),
+	(6,'Gatito','Utilizado para diferenciar en alimentos'),
+	(7,'Ave','productos para aves'),
+	(8,'Pez','productos para peces'),
+	(9,'Reptil','productos para reptiles'),
+	(10,'Roedor','productos para roedores');
+
+
 -- Estructura para insertar registros en `PRODUCTO`
 
 INSERT INTO `PRODUCTO`
 	VALUES
-		(1,'Balanced 15KG Perro Adulto',1,8906,1),
-		(2,'Eukanuba 15KG Perro Adulto',1,10425,1),
-		(3,'Excellent 7.5KG Gatito',1,9925,2),
-		(4,'Club Performance 7.5KG Gato Adulto',1,7813,2),
-        
-		(5,'Dentastix Pedigree saber carne para Perro',2,123,1),
-		(6,'Orejas de vaca masticable para Perro',2,1685,1),
-		(7,'Tiritas Dr.Zoo de Salmon para Gato',2,250,2),
-		(8,'Chocolate Blanco Innovar para Gato',2,145,2),
-        
-		(9,'Soga Puppis tres nudos para Perro',3,823.20,1),
-		(10,'Pelota Puppis Tenis para Perro',3,323.40,1),
-		(11,'Cañita Puppis Insecto para Gato',3,785.40,2),
-		(12,'Rascador Puppis ola carton para Gato',3,2110,2),
-        
-		(13,'Piedras sanitarias Tidy Cats 3.6KG',4,875,1),
-		(14,'Arena sanitaria StonCat 4KG',4,1140,1),
-		(15,'Toallitas patas humedas 80u. Perro',4,1400,2),
-		(16,'Cortauñas Puppis para Perro',4,1070,2),
-        
-		(17,'PowerUltra 5-10KG (1 pipeta) Perro',5,650,1),
-		(18,'PowerUltra 11-20KG (1 pipeta) Perro',5,750,1),
-		(19,'Pipeta PowerMet antipulgas para Gato, hasta 4KG',5,590,2),
-		(20,'Pipeta PowerSport On para Gato, 4-8KG',5,560,2);
+		(1,'Balanced 15KG Perro Adulto',1,3,8906,1),
+		(2,'Eukanuba 15KG Cachorro',1,4,10425,1),
+		(3,'Excellent 7.5KG Gatito',1,6,9925,2),
+		(4,'Club Performance 7.5KG Gato Adulto',1,5,7813,2),
+		(5,'Dentastix Pedigree saber carne para Perro',2,1,123,1),
+		(6,'Orejas de vaca masticable para Perro',2,1,1685,1),
+		(7,'Tiritas Dr.Zoo de Salmon para Gato',2,1,250,2),
+		(8,'Chocolate Blanco Innovar para Gato',2,1,145,2),
+		(9,'Soga Puppis tres nudos para Perro',3,1,823.2,1),
+		(10,'Pelota Puppis Tenis para Perro',3,1,323.4,1),
+		(11,'Cañita Puppis Insecto para Gato',3,1,785.4,2),
+		(12,'Rascador Puppis ola carton para Gato',3,1,2110,2),
+		(13,'Piedras sanitarias Tidy Cats 3.6KG',4,2,875,1),
+		(14,'Arena sanitaria StonCat 4KG',4,2,1140,1),
+		(15,'Toallitas patas humedas 80u. Perro',4,1,1400,2),
+		(16,'Cortauñas Puppis para Perro',4,1,1070,2),
+		(17,'PowerUltra 5-10KG (1 pipeta) Perro',5,1,650,1),
+		(18,'PowerUltra 11-20KG (1 pipeta) Perro',5,1,750,1),
+		(19,'Pipeta PowerMet antipulgas para Gato, hasta 4KG',5,2,590,2),
+		(20,'Pipeta PowerSport On para Gato, 4-8KG',5,2,560,2);
+
  
 
 -- Estructura para insertar registros en `DETALLE_VENTA`
 
 INSERT INTO `DETALLE_VENTA`
 	VALUES
-		(1,1,1,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),21,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(2,1,6,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),21,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(3,1,16,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),21,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(4,1,17,5,f_calcular_subtotal(DET_IDProducto,DET_cantidad),21,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(5,2,2,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),21,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(6,3,9,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),21,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(7,4,14,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),21,f_calcular_recargo(DET_subtotal,DET_recargo));
+		(1,1,1,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(2,1,6,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(3,1,16,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(4,1,17,5,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(5,2,2,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(6,3,9,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(7,4,14,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo));
 
 
 

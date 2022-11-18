@@ -62,7 +62,7 @@ INSERT INTO `EMPLEADO`
 		(1,1,'Edgar','Flores','Masculino','64.474.460','756-788-1519','1987-10-05',100000.00,'2021-05-31'),
 		(2,2,'Maria','Taler','Femenino','67.607.435','341-341-0660','2000-12-27',50000.00,'2021-03-24'),
 		(3,1,'Emanuel','Isba','Masculino','75.706.887','537-880-8516','1994-03-15',100000.00,'2020-05-10'),
-        (4,2,'Nanda','Waler','Femenino','68.657.445','321-371-0610','1999-12-17',50000.00,'2019-07-30');
+		(4,2,'Nanda','Waler','Femenino','68.657.445','321-371-0610','1999-12-17',50000.00,'2019-07-30');
 
 
 -- Estructura para insertar registros en `SERVICIO`
@@ -130,16 +130,16 @@ INSERT INTO `PROVEEDOR`
 -- Estructura para insertar registros en `SUBCATEGORIA_PRODUCTO`
 INSERT INTO `SUBCATEGORIA_PRODUCTO`
 	VALUES
-	(1,'Perro','generalizar en cualquier producto para perros, excepto alimento'),
-	(2,'Gato','generalizar en cualquier producto para gatos, excepto alimento'),
-	(3,'Perro Adulto','Utilizado para diferenciar en alimentos'),
-	(4,'Cachorro','Utilizado para diferenciar en alimentos'),
-	(5,'Gato Adulto','Utilizado para diferenciar en alimentos'),
-	(6,'Gatito','Utilizado para diferenciar en alimentos'),
-	(7,'Ave','productos para aves'),
-	(8,'Pez','productos para peces'),
-	(9,'Reptil','productos para reptiles'),
-	(10,'Roedor','productos para roedores');
+		(1,'Perro','generalizar en cualquier producto para perros, excepto alimento'),
+		(2,'Gato','generalizar en cualquier producto para gatos, excepto alimento'),
+		(3,'Perro Adulto','Utilizado para diferenciar en alimentos'),
+		(4,'Cachorro','Utilizado para diferenciar en alimentos'),
+		(5,'Gato Adulto','Utilizado para diferenciar en alimentos'),
+		(6,'Gatito','Utilizado para diferenciar en alimentos'),
+		(7,'Ave','productos para aves'),
+		(8,'Pez','productos para peces'),
+		(9,'Reptil','productos para reptiles'),
+		(10,'Roedor','productos para roedores');
 
 
 -- Estructura para insertar registros en `PRODUCTO`

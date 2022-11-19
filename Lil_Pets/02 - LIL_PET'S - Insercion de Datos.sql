@@ -27,7 +27,27 @@ INSERT INTO `CLIENTE`
 		(7,'Rufe','Pocke','50.484.211','4420 Veith Alley','194-451-7397','rpocke6@nbcnews.com'),
 		(8,'Gabriell','McRuvie','30.618.919','06 Gateway Place','224-963-4213','gmcruvie7@behance.net'),
 		(9,'Conway','Ghio','83.378.384','797 Sycamore Point','950-472-3357','cghio8@rambler.ru'),
-		(10,'Fannie','De La Cote','25.902.948','6482 Steensland Point','642-667-2430','fdelacote9@webs.com');
+		(10,'Fannie','De La Cote','25.902.948','6482 Steensland Point','642-667-2430','fdelacote9@webs.com'),
+        (11,'estefania','arocas','34.512.275','Perito P. Moreno 3261','366-846-5842','africa@altecom.es'),
+		(12,'queralt','viso','34.512.276','Harris Pauls 795','367-847-5843','agata@hotmail.com'),
+		(13,'joan','ayala ','34.512.277','Av. Batalla De Ayacucho 6036','368-848-5844','cangur@intercom.es'),
+		(14,'joan','baez','34.512.278','Arturo Frondizi 424 P','369-849-5845','albatros@wandoo.es'),
+		(15,'marc','bastardes','34.512.279','Alberdi 763','366-846-5843','albert@intercom.es'),
+		(16,'josep','anguera','34.512.280','Sgto Cabral. 2278','367-847-5844','alien@intercom.es'),
+		(17,'esther','pascual','34.512.281','San Luis 237','368-848-5845','amores@hotmail.com'),
+		(18,'laura','vallés','34.512.282','Islas Malvinas 264 Piso 06 Dpto D','369-849-5846','anabel@altecom.es'),
+		(19,'raquel','raya','34.512.283','Las Malvinas 795','366-846-5844','antiga@minorisa.es'),
+		(20,'joan','andreu','34.512.284','Catamarca 44','366-846-5843','ballador@hotmail.com'),
+		(21,'maria','baraldés comas','34.512.285','Catamarca Sur 1049','367-847-5844','balladora@altecom.es'),
+		(22,'adrià','berengueras','34.512.286','Guemes 589','368-848-5845','barbilla@hotmail.com'),
+		(23,'gerard','lópez','34.512.287','Islas Malvinas 264 Piso 06 Dpto E','369-849-5846','besugo@minorisa.es'),
+		(24,'eliot','arnau','34.512.288','Las Malvinas 704','366-846-5844','bogart@terra.es'),
+		(25,'jordi','raya','34.512.289','Catamarca 21','367-847-5845','bond@terra.es'),
+		(26,'lluís','zambudio','34.512.290','Catamarca Sur 1150','368-848-5846','caparranas@altecom.es'),
+		(27,'laura','bidault','34.512.291','Guemes 450','369-849-5847','cabeza larga@cataloniamail.com'),
+		(28,'jordi','biosca','34.512.292','Islas Malvinas 264 Piso 05 Dpto A','366-846-5845','carretero@intercom.es'),
+		(29,'david','zafr','34.512.293','Las Malvinas 850','366-846-5844','cela@altecom.es');
+
 
 
 -- Estructura para insertar registros en `MASCOTA`
@@ -44,7 +64,26 @@ INSERT INTO `MASCOTA`
 		(8,7,'Desert','2022-07-07','perro','dogo del tíbet','M',38.066,'NULL'),
 		(9,8,'Dik','2021-11-28','elefante','NULL','F',71.349,'NULL'),
 		(10,9,'Cormorant','2022-05-29','perro','landseer','F',7.03,'NULL'),
-		(11,10,'Plover','2022-01-11','perro','terranova','F',25.394,'NULL');
+		(11,10,'Plover','2022-01-11','perro','terranova','F',25.394,'NULL'),
+        (12,12,'Flycatcher','2021-04-28','gato','NULL','F',3.299,'NULL'),
+		(13,13,'Tamandua','2021-07-18','ave','loro','M',1.015,'NULL'),
+		(14,13,'Fox','2021-01-08','roedor','Hamster','M',1.876,'NULL'),
+		(15,14,'Black','2021-04-15','conejo','NULL','F',2.919,'NULL'),
+		(16,16,'Red','2021-08-17','gato','asiatico','M',4.527,'NULL'),
+		(17,15,'Gorilla','2021-03-20','perro','whippet','M',5.693,'NULL'),
+		(18,17,'Grants','2022-10-04','conejo','NULL','F',2.743,'NULL'),
+		(19,29,'Heron','2021-10-08','ave','cotorra','F',1.319,'NULL'),
+		(20,21,'Scarlet','2022-06-01','roedor','Hamster','M',1.287,'NULL'),
+		(21,20,'Baboon','2021-10-04','reptil','Iguana','F',2.954,'NULL'),
+		(22,22,'Cape','2022-11-01','pez','veiltail','M',9.596,'NULL'),
+		(23,25,'Dogi','2021-05-24','perro','beagle','M',4.252,'NULL'),
+		(24,24,'Greater','2022-05-05','gato','bengalí','F',3.852,'NULL'),
+		(25,23,'Mynah','2022-05-05','conejo','NULL','F',3.431,'NULL'),
+		(26,28,'Goose','2022-05-23','roedor','Cobayo','F',1.929,'NULL'),
+		(27,26,'Squirrel','2021-09-27','ave','Agapornis','M',0.841,'NULL'),
+		(28,27,'Brolga','2022-07-19','perro','fox','M',3.834,'NULL'),
+		(29,27,'Ipon','2022-03-10','perro','yorkshire terrier','M',3.481,'NULL');
+
 
 
 -- Estructura para insertar registros en `CATEGORIA_EMPLEADO`
@@ -62,7 +101,14 @@ INSERT INTO `EMPLEADO`
 		(1,1,'Edgar','Flores','Masculino','64.474.460','756-788-1519','1987-10-05',100000.00,'2021-05-31'),
 		(2,2,'Maria','Taler','Femenino','67.607.435','341-341-0660','2000-12-27',50000.00,'2021-03-24'),
 		(3,1,'Emanuel','Isba','Masculino','75.706.887','537-880-8516','1994-03-15',100000.00,'2020-05-10'),
-		(4,2,'Nanda','Waler','Femenino','68.657.445','321-371-0610','1999-12-17',50000.00,'2019-07-30');
+		(4,2,'Nanda','Waler','Femenino','68.657.445','321-371-0610','1999-12-17',50000.00,'2019-07-30'),
+		(5,1,'Effie','Skune','Femenino','32.587.780','455-455-4565','1994-07-07',70000,'2021-12-01'),
+		(6,1,'Dorian','Scolding','Masculino','32.587.781','456-456-4565','1994-07-08',50000,'2022-06-02'),
+		(7,1,'Jilleen','Cammomile','Femenino','32.587.782','455-455-4566','1994-07-09',30000,'2022-01-03'),
+		(8,2,'Rona','Swalwel','Femenino','32.587.783','455-455-4566','1994-07-10',20000,'2020-12-04'),
+		(9,2,'Geoffry','Batkin','Masculino','32.587.784','456-456-4566','1994-07-11',40000,'2021-02-05'),
+		(10,2,'Ediva','Huller','Femenino','32.587.785','455-455-4567','1994-07-12',65000,'2021-12-06');
+
 
 
 -- Estructura para insertar registros en `SERVICIO`
@@ -88,7 +134,32 @@ INSERT INTO `SERVICIO_SOLICITADO`
 		(2,4,3,3,'2022-11-02 19:00'),
 		(3,1,11,1,'2022-11-03 16:15'),
 		(4,2,4,3,'2022-11-01 15:30'),
-		(5,9,10,4,'2022-11-01 15:30');
+		(5,9,10,4,'2022-11-01 15:30'),
+		(6,1,8,7,'2021-08-24 06:30'),
+		(7,4,9,6,'2021-12-19 09:00'),
+		(8,4,24,5,'2021-04-21 18:00'),
+		(9,4,15,5,'2021-06-12 04:00'),
+		(10,2,29,6,'2022-07-15 18:00'),
+		(11,3,6,1,'2022-08-26 08:00'),
+		(12,4,8,3,'2022-11-11 12:25'),
+		(13,4,11,5,'2022-04-22 09:10'),
+		(14,1,12,7,'2021-07-25 09:00'),
+		(15,1,13,6,'2021-08-15 10:45'),
+		(16,3,15,1,'2022-07-28 15:00'),
+		(17,2,27,3,'2021-02-26 18:45'),
+		(18,1,21,5,'2022-10-02 12:50'),
+		(19,1,20,5,'2021-06-19 17:00'),
+		(20,4,23,5,'2022-06-25 18:16'),
+		(21,5,19,10,'2022-03-07 07:11'),
+		(22,6,1,9,'2021-10-06 07:51'),
+		(23,6,3,10,'2022-03-18 10:39'),
+		(24,8,5,8,'2022-06-17 08:09'),
+		(25,9,13,4,'2022-01-01 05:52'),
+		(26,6,11,2,'2021-07-02 11:54'),
+		(27,6,16,10,'2022-06-25 18:15'),
+		(28,8,18,9,'2021-12-20 14:14'),
+		(29,6,28,8,'2022-03-07 07:11'),
+		(30,7,27,8,'2022-01-31 13:20');
 
 
 -- Estructura para insertar registros en `HISTORIAL`
@@ -105,7 +176,15 @@ INSERT INTO `PEDIDO`
 		(1,3,DEFAULT),
 		(2,7,'2022-01-11 16:59:31'),
 		(3,5,'2022-04-13 18:46:32'),
-		(4,1,'2022-08-17 18:48:50');
+		(4,1,'2022-08-17 18:48:50'),
+		(5,3,DEFAULT),
+		(6,5,DEFAULT),
+		(7,7,DEFAULT),
+		(8,14,DEFAULT),
+		(9,29,DEFAULT),
+		(10,17,DEFAULT),
+		(11,4,DEFAULT),
+		(12,7,DEFAULT);
 
 
 -- Estructura para insertar registros en `CATEGORIA_PRODUCTO`
@@ -179,7 +258,20 @@ INSERT INTO `DETALLE_VENTA`
 		(4,1,17,5,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
 		(5,2,2,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
 		(6,3,9,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(7,4,14,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo));
+		(7,4,14,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(8,5,6,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(9,5,2,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(10,6,4,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(11,7,8,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(12,7,12,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(13,8,1,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(14,9,3,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(15,9,5,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(16,10,4,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(17,11,8,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(18,11,9,4,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(19,11,1,4,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
+		(20,12,3,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo));
 
 
 

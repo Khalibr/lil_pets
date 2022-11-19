@@ -331,13 +331,15 @@ CREATE OR REPLACE VIEW `mas_vendido_view` AS
 	SELECT
 		d.DET_IDProducto AS item,
 		p.PROD_descripcion AS producto,
-		d.DET_cantidad AS cantidad
+		SUM(d.DET_cantidad) AS cantidad
 	FROM
 		DETALLE_VENTA AS d
 	JOIN
 		PRODUCTO AS p ON (p.PROD_ID = d.DET_IDProducto)
+	GROUP BY
+		DET_IDPRODUCTO
 	ORDER BY
-		d.DET_cantidad DESC
+		cantidad DESC
 	LIMIT 5
 );
 
@@ -424,6 +426,7 @@ CREATE OR REPLACE VIEW `top10_clientes_view` AS
 );
 
 
+
 -- VISTA CON MULTIPLE JOIN'S DE LA TABLA `PRODUCTO`, DONDE SE REEMPLAZAN LAS FK POR SU NOMBRE/DESCRIPCION DE TABLAS RELACIONADAS
 
 CREATE OR REPLACE VIEW `productos_view` AS
@@ -462,7 +465,7 @@ CREATE OR REPLACE VIEW `servicios_solicitados_view` AS
 		MAS_nombre AS mascota,
 		MAS_raza AS raza,
 		f_concat_nombre_completo(CLI_nombre,CLI_apellido) AS cliente,
-		EMP_nombre AS empleado,
+		f_concat_nombre_completo(EMP_nombre,EMP_apellido) AS empleado,
 		CAT_descripcion AS categoria_empleado,
 		SOL_fechahora AS fecha_hora,
 		SER_descripcion AS descripcion
@@ -479,6 +482,7 @@ CREATE OR REPLACE VIEW `servicios_solicitados_view` AS
 	JOIN
 		CATEGORIA_EMPLEADO ON (EMP_IDCategoria = CAT_IDEmpleado)
 );
+
 
 
 -- VISTA DE LOS 5 SERVICIOS MAS SOLICITADOS

@@ -15,7 +15,6 @@ USE `Lil_Pets`;
 
 
 -- Estructura para insertar registros en `CLIENTE`
-
 INSERT INTO `CLIENTE`
 	VALUES
 		(1,'Godiva','Meritt','62.885.923','7 Canary Court','493-713-0830','gmeritt0@ask.com'),
@@ -51,7 +50,6 @@ INSERT INTO `CLIENTE`
 
 
 -- Estructura para insertar registros en `MASCOTA`
-
 INSERT INTO `MASCOTA`
 	VALUES
 		(1,1,'Africa','2022-09-19','perro','coker','M',18.997,'NULL'),
@@ -87,7 +85,6 @@ INSERT INTO `MASCOTA`
 
 
 -- Estructura para insertar registros en `CATEGORIA_EMPLEADO`
-
 INSERT INTO `CATEGORIA_EMPLEADO`
 	VALUES
 		(1,'Atencion Medica'),
@@ -95,7 +92,6 @@ INSERT INTO `CATEGORIA_EMPLEADO`
 
 
 -- Estructura para insertar registros en `EMPLEADO`
-
 INSERT INTO `EMPLEADO`
 	VALUES
 		(1,1,'Edgar','Flores','Masculino','64.474.460','756-788-1519','1987-10-05',100000.00,'2021-05-31'),
@@ -112,7 +108,6 @@ INSERT INTO `EMPLEADO`
 
 
 -- Estructura para insertar registros en `SERVICIO`
-     
 INSERT INTO `SERVICIO`
 	VALUES
 		(1,'Veterinaria','Castración',10000,'Castraciones de machos y hembras, caninos y felinos'),
@@ -127,7 +122,6 @@ INSERT INTO `SERVICIO`
 
 
 -- Estructura para insertar registros en `SERVICIO_SOLICITADO`
-     
 INSERT INTO `SERVICIO_SOLICITADO`
 	VALUES
 		(1,7,1,2,'2022-10-31 11:00'),
@@ -163,14 +157,12 @@ INSERT INTO `SERVICIO_SOLICITADO`
 
 
 -- Estructura para insertar registros en `HISTORIAL`
-
 INSERT INTO `HISTORIAL`
 	VALUES
 		(1,3,'bajo peso');
 
 
 -- Estructura para insertar registros en `PEDIDO`
-
 INSERT INTO `PEDIDO`
 	VALUES
 		(1,3,DEFAULT),
@@ -188,7 +180,6 @@ INSERT INTO `PEDIDO`
 
 
 -- Estructura para insertar registros en `CATEGORIA_PRODUCTO`
-    
 INSERT INTO `CATEGORIA_PRODUCTO`
 	VALUES
 		(1,'Alimentos'),
@@ -199,7 +190,6 @@ INSERT INTO `CATEGORIA_PRODUCTO`
 
 
 -- Estructura para insertar registros en `PROVEEDOR`
-
 INSERT INTO `PROVEEDOR`
 	VALUES
 		(1,'Wuckert LLC','30.927.7183','639-822-6952','dconn0@gov.uk','31306 Bobwhite Way','fotki.com'),
@@ -222,7 +212,6 @@ INSERT INTO `SUBCATEGORIA_PRODUCTO`
 
 
 -- Estructura para insertar registros en `PRODUCTO`
-
 INSERT INTO `PRODUCTO`
 	VALUES
 		(1,'Balanced 15KG Perro Adulto',1,3,8906,1),
@@ -249,7 +238,6 @@ INSERT INTO `PRODUCTO`
  
 
 -- Estructura para insertar registros en `DETALLE_VENTA`
-
 INSERT INTO `DETALLE_VENTA`
 	VALUES
 		(1,1,1,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),

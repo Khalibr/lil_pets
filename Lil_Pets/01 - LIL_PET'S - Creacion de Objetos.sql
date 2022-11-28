@@ -21,14 +21,11 @@ CREATE SCHEMA IF NOT EXISTS `Lil_Pets`;
 USE `Lil_Pets`;
 
 
-/* 
--
-• INICIO DE LA CREACION DE ENTIDADES PARA LA BD `LIL_PET'S`
--
-*/
+-- *************************************************************
+-- * INICIO DE LA CREACION DE ENTIDADES PARA LA BD `LIL_PET'S` *
+-- *************************************************************
 
 -- Estructura para la tabla `CLIENTE`
-
 CREATE TABLE IF NOT EXISTS `CLIENTE`(
 	CLI_ID INT NOT NULL AUTO_INCREMENT,
 	CLI_nombre VARCHAR(50) NOT NULL,
@@ -42,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `CLIENTE`(
 
 
 -- Estructura para la tabla `MASCOTA`
-
 CREATE TABLE IF NOT EXISTS `MASCOTA`(
 	MAS_ID INT NOT NULL AUTO_INCREMENT,
 	MAS_IDCliente INT NOT NULL,
@@ -59,7 +55,6 @@ CREATE TABLE IF NOT EXISTS `MASCOTA`(
 
 
 -- Estructura para la tabla `CATEGORIA_EMPLEADO`
-
 CREATE TABLE IF NOT EXISTS `CATEGORIA_EMPLEADO`(
 	CAT_IDEmpleado INT NOT NULL AUTO_INCREMENT,
 	CAT_descripcion VARCHAR(140) NOT NULL,
@@ -68,7 +63,6 @@ CREATE TABLE IF NOT EXISTS `CATEGORIA_EMPLEADO`(
 
 
 -- Estructura para la tabla `EMPLEADO`
-
 CREATE TABLE IF NOT EXISTS `EMPLEADO`(
 	EMP_ID INT NOT NULL AUTO_INCREMENT,
 	EMP_IDCategoria INT NOT NULL,
@@ -87,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `EMPLEADO`(
 
 
 -- Estructura para la tabla `SERVICIO`
-
 CREATE TABLE IF NOT EXISTS `SERVICIO`(
 	SER_ID INT NOT NULL AUTO_INCREMENT,
 	SER_area VARCHAR(50) NOT NULL,
@@ -99,7 +92,6 @@ CREATE TABLE IF NOT EXISTS `SERVICIO`(
 
 
 -- Estructura para la tabla `SERVICIO_SOLICITADO`
-
 CREATE TABLE IF NOT EXISTS `SERVICIO_SOLICITADO`(
 	SOL_ID INT NOT NULL AUTO_INCREMENT,
 	SOL_IDServicio INT NOT NULL,
@@ -114,7 +106,6 @@ CREATE TABLE IF NOT EXISTS `SERVICIO_SOLICITADO`(
 
 
 -- Estructura para la tabla `HISTORIAL`
-
 CREATE TABLE IF NOT EXISTS `HISTORIAL`(
 	HIS_ID INT NOT NULL AUTO_INCREMENT,
 	HIS_IDMascota INT NOT NULL,
@@ -125,7 +116,6 @@ CREATE TABLE IF NOT EXISTS `HISTORIAL`(
 
 
 -- Estructura para la tabla `PEDIDO`
-
 CREATE TABLE IF NOT EXISTS `PEDIDO`(
 	PED_ID INT NOT NULL AUTO_INCREMENT,
 	PED_IDCliente INT NOT NULL,
@@ -136,7 +126,6 @@ CREATE TABLE IF NOT EXISTS `PEDIDO`(
 
 
 -- Estructura para la tabla `CATEGORIA_PRODUCTO`
-
 CREATE TABLE IF NOT EXISTS `CATEGORIA_PRODUCTO`(
 	CAT_IDProducto INT NOT NULL AUTO_INCREMENT,
 	CAT_descripcion VARCHAR(50) NOT NULL,
@@ -145,7 +134,6 @@ CREATE TABLE IF NOT EXISTS `CATEGORIA_PRODUCTO`(
 
 
 -- Estructura para la tabla `PROVEEDOR`
-
 CREATE TABLE IF NOT EXISTS `PROVEEDOR`(
 	PROV_ID INT NOT NULL AUTO_INCREMENT,
 	PROV_nombre VARCHAR(50) NOT NULL,
@@ -159,7 +147,6 @@ CREATE TABLE IF NOT EXISTS `PROVEEDOR`(
 
 
 -- Estructura para la tabla `SUBCATEGORIA_PRODUCTO`
-
 CREATE TABLE IF NOT EXISTS `SUBCATEGORIA_PRODUCTO`(
 	SUB_ID INT NOT NULL AUTO_INCREMENT,
 	SUB_especieEdad VARCHAR(50) NOT NULL,
@@ -167,8 +154,8 @@ CREATE TABLE IF NOT EXISTS `SUBCATEGORIA_PRODUCTO`(
 	PRIMARY KEY(SUB_ID)
 );
 
--- Estructura para la tabla `PRODUCTO`
 
+-- Estructura para la tabla `PRODUCTO`
 CREATE TABLE IF NOT EXISTS `PRODUCTO`(
 	PROD_ID INT NOT NULL AUTO_INCREMENT,    
 	PROD_descripcion VARCHAR(140) NOT NULL,
@@ -184,7 +171,6 @@ CREATE TABLE IF NOT EXISTS `PRODUCTO`(
 
 
 -- Estructura para la tabla `DETALLE_VENTA`
-
 CREATE TABLE IF NOT EXISTS `DETALLE_VENTA`(
 	DET_ID INT NOT NULL AUTO_INCREMENT,
 	DET_IDPedido INT NOT NULL,
@@ -200,14 +186,12 @@ CREATE TABLE IF NOT EXISTS `DETALLE_VENTA`(
 
 
 
-/* 
--
-• INICIO DE LA CREACION DE TABLAS DE AUDITORIA PARA LA BD `LIL_PET'S`
--
-*/
+
+-- ***********************************************************************
+-- * INICIO DE LA CREACION DE TABLAS DE AUDITORIA PARA LA BD `LIL_PET'S` *
+-- ***********************************************************************
 
 -- CREACION DE LA TABLA "LOG_DETALLE_VENTA" DEL TRIGGER
-
 CREATE TABLE IF NOT EXISTS  `log_detalle_venta`
 (
 	log_evento VARCHAR(50),
@@ -223,7 +207,6 @@ CREATE TABLE IF NOT EXISTS  `log_detalle_venta`
 
 
 -- CREACION DE LA TABLA "LOG_SERVICIO_SOLICITADO" DEL TRIGGER
-
 CREATE TABLE IF NOT EXISTS `log_servicio_solicitados`
 (
 	log_evento VARCHAR(50),
@@ -239,7 +222,6 @@ CREATE TABLE IF NOT EXISTS `log_servicio_solicitados`
 
 
 -- CREACION DE LA TABLA "LOG_PRECIO_ANTIGUO" PARA EL TRIGGER
-
 CREATE TABLE IF NOT EXISTS `log_precio_antiguo`
 (
 	log_evento VARCHAR(50),
@@ -253,13 +235,9 @@ CREATE TABLE IF NOT EXISTS `log_precio_antiguo`
 
 
 
-/* 
--
-• INICIO DE LA CREACION DE FUNCIONES PARA LA BD `LIL_PET'S`
--
-*/
-
-
+-- *************************************************************
+-- * INICIO DE LA CREACION DE FUNCIONES PARA LA BD `LIL_PET'S` *
+-- *************************************************************
 
 DELIMITER $$
 
@@ -274,6 +252,7 @@ BEGIN
 	RETURN retorno;
 END$$
 
+-- *******************************************
 DROP FUNCTION IF EXISTS `f_calcular_recargo`$$
 
 -- FUNCION: calcula el iva 
@@ -285,7 +264,7 @@ BEGIN
 	RETURN retorno;
 END$$
 
-
+-- *****************************************
 DROP FUNCTION IF EXISTS `f_concat_precios`$$
 
 -- FUNCION: concatena el simbolo `$` a los precios
@@ -298,7 +277,7 @@ BEGIN
 END$$
 
 
-
+-- ********************************************
 DROP FUNCTION IF EXISTS `f_calcular_subtotal`$$
 
 -- FUNCION: calcula el subtotal pasando por referencia los campos de producto y cantidad
@@ -318,12 +297,9 @@ DELIMITER ;
 
 
 
-/* 
--
-• INICIO DE LA CREACION DE FUNCIONES PARA LA BD `LIL_PET'S`
--
-*/
-
+-- *************************************************************
+-- * INICIO DE LA CREACION DE FUNCIONES PARA LA BD `LIL_PET'S` *
+-- *************************************************************
 
 -- VISTA DE LOS PRODUCTOS MAS VENDIDOS
 CREATE OR REPLACE VIEW `mas_vendido_view` AS
@@ -345,7 +321,6 @@ CREATE OR REPLACE VIEW `mas_vendido_view` AS
 
 
 -- VISTA DE LOS PRODUCTOS PARA GATO ADULTO
-
 CREATE OR REPLACE VIEW `productos_gatos_view` AS
 (
 	SELECT
@@ -368,7 +343,6 @@ CREATE OR REPLACE VIEW `productos_gatos_view` AS
 
 
 -- VISTA DE LOS PRODUCTOS PARA PERROS
- 
 CREATE OR REPLACE VIEW `productos_perros_view` AS
 (
 	SELECT
@@ -392,7 +366,6 @@ CREATE OR REPLACE VIEW `productos_perros_view` AS
 
 
 -- VISTA DE LAS MASCOTAS ASOCIADAS CON SU DUEÑO
-
 CREATE OR REPLACE VIEW `cliente_mascotas_view` AS
 (
 	SELECT
@@ -407,7 +380,6 @@ CREATE OR REPLACE VIEW `cliente_mascotas_view` AS
 
 
 -- VISTA DEL TOP 10 DE LOS CLIENTES QUE MAS COMPRARON
-
 CREATE OR REPLACE VIEW `top10_clientes_view` AS
 (
 	SELECT
@@ -426,9 +398,7 @@ CREATE OR REPLACE VIEW `top10_clientes_view` AS
 );
 
 
-
 -- VISTA CON MULTIPLE JOIN'S DE LA TABLA `PRODUCTO`, DONDE SE REEMPLAZAN LAS FK POR SU NOMBRE/DESCRIPCION DE TABLAS RELACIONADAS
-
 CREATE OR REPLACE VIEW `productos_view` AS
 (
 	SELECT
@@ -455,7 +425,6 @@ CREATE OR REPLACE VIEW `productos_view` AS
 
 -- VISTA CON MULTIPLES JOIN'S, DETALLA LOS SERVICIOS SOLICITADOS
 -- ADICIONANDO INFORMACION ESCALADA DE TABLAS RELACIONADAS UNA CON OTRAS
-
 CREATE OR REPLACE VIEW `servicios_solicitados_view` AS
 (
 	SELECT
@@ -484,9 +453,7 @@ CREATE OR REPLACE VIEW `servicios_solicitados_view` AS
 );
 
 
-
 -- VISTA DE LOS 5 SERVICIOS MAS SOLICITADOS
-
 CREATE OR REPLACE VIEW `servicios_mas_solicitados_view` AS
 (
 	SELECT
@@ -504,8 +471,8 @@ CREATE OR REPLACE VIEW `servicios_mas_solicitados_view` AS
 	LIMIT 5
 );
 
--- VISTA DE LA GANANCIA MENSUAL DE VENTAS DEL AÑO 2022
 
+-- VISTA DE LA GANANCIA MENSUAL DE VENTAS DEL AÑO 2022
 CREATE OR REPLACE VIEW `ganancias_x_mes_view` AS
 (
 	SELECT
@@ -526,7 +493,6 @@ CREATE OR REPLACE VIEW `ganancias_x_mes_view` AS
 
 
 -- VISTA DE GANANCIAS MENSUALES DE LOS SERVICIOS REALIZADOS DEL AÑO 2022
-
 CREATE OR REPLACE VIEW `ganancia_servicios_view` AS
 (
 	SELECT
@@ -547,20 +513,15 @@ CREATE OR REPLACE VIEW `ganancia_servicios_view` AS
 
 
 
-/* 
--
-• INICIO DE LA CREACION DE STORED PROCEDURES PARA LA BD `LIL_PET'S`
--
-*/
-
-
+-- *********************************************************************
+-- * INICIO DE LA CREACION DE STORED PROCEDURES PARA LA BD `LIL_PET'S` *
+-- *********************************************************************
 
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `sp_ordenar_productos`$$
 
 -- SP que ordena los productos segun el parametro que se le indique y en que orden (ASC/DESC)
-
 CREATE PROCEDURE `sp_ordenar_productos` (IN campo VARCHAR(20), IN orden VARCHAR(4))
 BEGIN
 	-- concatenacion del ordenamiento
@@ -581,10 +542,10 @@ BEGIN
 END$$
 
 
+-- **********************************************
 DROP PROCEDURE IF EXISTS `sp_insert_new_client`$$
 
 -- SP para insertar datos de un nuevo cliente
-
 CREATE PROCEDURE `sp_insert_new_client` (IN sp_CLI_ID INT, IN sp_CLI_nombre VARCHAR(50), IN sp_CLI_apellido VARCHAR(50), IN sp_CLI_DNI VARCHAR(50), IN sp_CLI_domicilio VARCHAR(50),  IN sp_CLI_telefono VARCHAR(20),  IN sp_CLI_email VARCHAR(50))
 BEGIN
 	INSERT INTO `CLIENTE` (CLI_ID, CLI_nombre, CLI_apellido, CLI_DNI, CLI_domicilio, CLI_telefono, CLI_email)
@@ -593,10 +554,10 @@ BEGIN
 END$$
 
 
+-- ********************************************
 DROP PROCEDURE IF EXISTS `sp_delete_client`$$
 
 -- SP para eliminar un cliente de los registros
-
 CREATE PROCEDURE `sp_delete_client` (IN sp_CLI_ID INT)
 BEGIN
 	DELETE
@@ -608,13 +569,9 @@ END$$
 
 
 
-/* 
--
-• INICIO DE LA CREACION DE TRIGGERS DE AUDITORIA PARA LA BD `LIL_PET'S`
--
-*/
-
-
+-- *************************************************************************
+-- * INICIO DE LA CREACION DE TRIGGERS DE AUDITORIA PARA LA BD `LIL_PET'S` *
+-- *************************************************************************
 
 DROP TRIGGER IF EXISTS `tr_detalle_venta`$$
 
@@ -629,6 +586,7 @@ BEGIN
 END$$
 
 
+-- ************************************************
 DROP TRIGGER IF EXISTS  `tr_servicio_solicitados`$$
 
 -- CREACION DEL TRIGGER
@@ -639,9 +597,10 @@ BEGIN
 	INSERT INTO `log_servicio_solicitados`
 		VALUES
 		('Servicio solicitado',NEW.SOL_ID, NEW.SOL_IDServicio, NEW.SOL_IDMascota, NEW.SOL_IDEmpleado, NEW.SOL_fechahora, SESSION_USER(), CURRENT_TIMESTAMP());
-END$$      
-      
+END$$
 
+
+-- ********************************************
 DROP TRIGGER IF EXISTS `tr_precio_antiguo`$$
 
 -- CRECION DEL TRIGGER
@@ -655,6 +614,7 @@ BEGIN
 END$$
 
 DELIMITER ;
+
 
 /*
 -- SANDBOX:

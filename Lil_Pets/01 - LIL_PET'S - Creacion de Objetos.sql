@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS  `log_detalle_venta`
 	log_total DECIMAL(11,2),
 	log_usuario VARCHAR(50),
 	log_fechahora TIMESTAMP,
-    PRIMARY KEY (log_IDVenta)
+	PRIMARY KEY (log_IDVenta)
 );
 
 
@@ -308,8 +308,8 @@ CREATE OR REPLACE VIEW `vendido_view` AS
 		d.IDProducto AS item,
 		p.descripcion AS producto,
 		SUM(d.cantidad) AS cantidad,
-        f_calcular_subtotal(p.ID,SUM(d.cantidad)) AS "total sin recargo",
-        f_calcular_recargo(f_calcular_subtotal(p.ID,SUM(d.cantidad)),d.recargo) AS "total con recargo"
+		f_calcular_subtotal(p.ID,SUM(d.cantidad)) AS "total sin recargo",
+		f_calcular_recargo(f_calcular_subtotal(p.ID,SUM(d.cantidad)),d.recargo) AS "total con recargo"
 	FROM
 		DETALLE_VENTA AS d
 	JOIN

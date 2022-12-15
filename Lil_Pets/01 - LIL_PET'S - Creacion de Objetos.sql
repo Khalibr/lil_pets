@@ -22,173 +22,173 @@ USE `Lil_Pets`;
 
 
 -- *************************************************************
--- * INICIO DE LA CREACION DE ENTIDADES PARA LA BD `LIL_PET'S` *
+-- * Inicio de la creacion de ENTIDADES para la bd `LIL_PET'S` *
 -- *************************************************************
 
 -- Estructura para la tabla `CLIENTE`
 CREATE TABLE IF NOT EXISTS `CLIENTE`(
-	CLI_ID INT NOT NULL AUTO_INCREMENT,
-	CLI_nombre VARCHAR(50) NOT NULL,
-	CLI_apellido VARCHAR(50) NOT NULL,
-	CLI_DNI VARCHAR(50) NOT NULL,
-	CLI_domicilio VARCHAR(50) NOT NULL,
-	CLI_telefono VARCHAR(20) NOT NULL,
-	CLI_email VARCHAR(50) NOT NULL,
-	PRIMARY KEY(CLI_ID)
+	ID INT NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL,
+	apellido VARCHAR(50) NOT NULL,
+	DNI VARCHAR(50) NOT NULL,
+	domicilio VARCHAR(50) NOT NULL,
+	telefono VARCHAR(20) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	PRIMARY KEY(ID)
 );
 
 
 -- Estructura para la tabla `MASCOTA`
 CREATE TABLE IF NOT EXISTS `MASCOTA`(
-	MAS_ID INT NOT NULL AUTO_INCREMENT,
-	MAS_IDCliente INT NOT NULL,
-	MAS_nombre VARCHAR(50) NOT NULL,
-	MAS_edad DATE NOT NULL,
-	MAS_especie VARCHAR(50) NOT NULL,
-	MAS_raza VARCHAR(50) NOT NULL,
-	MAS_sexo VARCHAR(20) NOT NULL,
-	MAS_peso DECIMAL(6,3) NOT NULL,
-	MAS_descripcion VARCHAR(140) NOT NULL,
-	PRIMARY KEY(MAS_ID),
-	CONSTRAINT fk_id_cliente_mascota FOREIGN KEY(MAS_IDCliente) REFERENCES CLIENTE(CLI_ID) ON DELETE CASCADE
+	ID INT NOT NULL AUTO_INCREMENT,
+	IDCliente INT NOT NULL,
+	nombre VARCHAR(50) NOT NULL,
+	edad DATE NOT NULL,
+	especie VARCHAR(50) NOT NULL,
+	raza VARCHAR(50) NOT NULL,
+	sexo VARCHAR(20) NOT NULL,
+	peso DECIMAL(6,3) NOT NULL,
+	descripcion VARCHAR(140) NOT NULL,
+	PRIMARY KEY(ID),
+	CONSTRAINT fk_id_cliente_mascota FOREIGN KEY(IDCliente) REFERENCES CLIENTE(ID) ON DELETE CASCADE
 );
 
 
 -- Estructura para la tabla `CATEGORIA_EMPLEADO`
 CREATE TABLE IF NOT EXISTS `CATEGORIA_EMPLEADO`(
-	CAT_IDEmpleado INT NOT NULL AUTO_INCREMENT,
-	CAT_descripcion VARCHAR(140) NOT NULL,
-	PRIMARY KEY(CAT_IDEmpleado)
+	IDEmpleado INT NOT NULL AUTO_INCREMENT,
+	descripcion VARCHAR(140) NOT NULL,
+	PRIMARY KEY(IDEmpleado)
 );
 
 
 -- Estructura para la tabla `EMPLEADO`
 CREATE TABLE IF NOT EXISTS `EMPLEADO`(
-	EMP_ID INT NOT NULL AUTO_INCREMENT,
-	EMP_IDCategoria INT NOT NULL,
-	EMP_nombre VARCHAR(50) NOT NULL,
-	EMP_apellido VARCHAR(50) NOT NULL,
-	EMP_sexo VARCHAR(20) NOT NULL,
-	EMP_DNI VARCHAR(50) NOT NULL,
-	EMP_telefono VARCHAR(50) NOT NULL,
-	EMP_fechaNac DATE NOT NULL,
-	EMP_salario DECIMAL(8,2) NOT NULL,
-	EMP_fechaIngreso DATE NOT NULL,
-	PRIMARY KEY(EMP_ID),
-	CONSTRAINT fk_id_categoria_empleado FOREIGN KEY(EMP_IDCategoria)
-	REFERENCES CATEGORIA_EMPLEADO(CAT_IDEmpleado) ON DELETE CASCADE
+	ID INT NOT NULL AUTO_INCREMENT,
+	IDCategoria INT NOT NULL,
+	nombre VARCHAR(50) NOT NULL,
+	apellido VARCHAR(50) NOT NULL,
+	sexo VARCHAR(20) NOT NULL,
+	DNI VARCHAR(50) NOT NULL,
+	telefono VARCHAR(50) NOT NULL,
+	fechaNac DATE NOT NULL,
+	salario DECIMAL(8,2) NOT NULL,
+	fechaIngreso DATE NOT NULL,
+	PRIMARY KEY(ID),
+	CONSTRAINT fk_id_categoria_empleado FOREIGN KEY(IDCategoria)
+	REFERENCES CATEGORIA_EMPLEADO(IDEmpleado) ON DELETE CASCADE
 );
 
 
 -- Estructura para la tabla `SERVICIO`
 CREATE TABLE IF NOT EXISTS `SERVICIO`(
-	SER_ID INT NOT NULL AUTO_INCREMENT,
-	SER_area VARCHAR(50) NOT NULL,
-	SER_servicio VARCHAR(50) NOT NULL,
-	SER_costo DECIMAL(8,2) NOT NULL,
-	SER_descripcion VARCHAR(140) NOT NULL,
-	PRIMARY KEY(SER_ID)
+	ID INT NOT NULL AUTO_INCREMENT,
+	area VARCHAR(50) NOT NULL,
+	servicio VARCHAR(50) NOT NULL,
+	costo DECIMAL(8,2) NOT NULL,
+	descripcion VARCHAR(140) NOT NULL,
+	PRIMARY KEY(ID)
 );
 
 
 -- Estructura para la tabla `SERVICIO_SOLICITADO`
 CREATE TABLE IF NOT EXISTS `SERVICIO_SOLICITADO`(
-	SOL_ID INT NOT NULL AUTO_INCREMENT,
-	SOL_IDServicio INT NOT NULL,
-	SOL_IDMascota INT NOT NULL,
-	SOL_IDEmpleado INT NOT NULL,
-	SOL_fechahora DATETIME NOT NULL,
-	PRIMARY KEY(SOL_ID),
-	CONSTRAINT fk_id_servicio_s_solicitado FOREIGN KEY(SOL_IDServicio) REFERENCES SERVICIO(SER_ID) ON DELETE CASCADE,
-	CONSTRAINT fk_id_mascota_s_solicitado FOREIGN KEY(SOL_IDMascota) REFERENCES MASCOTA(MAS_ID) ON DELETE CASCADE,
-	CONSTRAINT fk_id_empleado_s_solicitado FOREIGN KEY(SOL_IDEmpleado) REFERENCES EMPLEADO(EMP_ID) ON DELETE CASCADE
+	ID INT NOT NULL AUTO_INCREMENT,
+	IDServicio INT NOT NULL,
+	IDMascota INT NOT NULL,
+	IDEmpleado INT NOT NULL,
+	fechahora DATETIME NOT NULL,
+	PRIMARY KEY(ID),
+	CONSTRAINT fk_id_servicio_s_solicitado FOREIGN KEY(IDServicio) REFERENCES SERVICIO(ID) ON DELETE CASCADE,
+	CONSTRAINT fk_id_mascota_s_solicitado FOREIGN KEY(IDMascota) REFERENCES MASCOTA(ID) ON DELETE CASCADE,
+	CONSTRAINT fk_id_empleado_s_solicitado FOREIGN KEY(IDEmpleado) REFERENCES EMPLEADO(ID) ON DELETE CASCADE
 );
 
 
 -- Estructura para la tabla `HISTORIAL`
 CREATE TABLE IF NOT EXISTS `HISTORIAL`(
-	HIS_ID INT NOT NULL AUTO_INCREMENT,
-	HIS_IDMascota INT NOT NULL,
-	HIS_diagnostico VARCHAR(140) NOT NULL,
-	PRIMARY KEY(HIS_ID),
-	CONSTRAINT fk_id_mascota_historial FOREIGN KEY(HIS_IDMascota) REFERENCES MASCOTA(MAS_ID) ON DELETE CASCADE
+	ID INT NOT NULL AUTO_INCREMENT,
+	IDMascota INT NOT NULL,
+	diagnostico VARCHAR(140) NOT NULL,
+	PRIMARY KEY(ID),
+	CONSTRAINT fk_id_mascota_historial FOREIGN KEY(IDMascota) REFERENCES MASCOTA(ID) ON DELETE CASCADE
 );
 
 
 -- Estructura para la tabla `PEDIDO`
 CREATE TABLE IF NOT EXISTS `PEDIDO`(
-	PED_ID INT NOT NULL AUTO_INCREMENT,
-	PED_IDCliente INT NOT NULL,
-	PED_fechahora TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY(PED_ID),
-	CONSTRAINT fk_id_cliente_pedido FOREIGN KEY(PED_IDCliente) REFERENCES CLIENTE(CLI_ID) ON DELETE CASCADE
+	ID INT NOT NULL AUTO_INCREMENT,
+	IDCliente INT NOT NULL,
+	fechahora TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(ID),
+	CONSTRAINT fk_id_cliente_pedido FOREIGN KEY(IDCliente) REFERENCES CLIENTE(ID) ON DELETE CASCADE
 );
 
 
 -- Estructura para la tabla `CATEGORIA_PRODUCTO`
 CREATE TABLE IF NOT EXISTS `CATEGORIA_PRODUCTO`(
-	CAT_IDProducto INT NOT NULL AUTO_INCREMENT,
-	CAT_descripcion VARCHAR(50) NOT NULL,
-	PRIMARY KEY(CAT_IDProducto)
+	IDProducto INT NOT NULL AUTO_INCREMENT,
+	descripcion VARCHAR(50) NOT NULL,
+	PRIMARY KEY(IDProducto)
 );
 
 
 -- Estructura para la tabla `PROVEEDOR`
 CREATE TABLE IF NOT EXISTS `PROVEEDOR`(
-	PROV_ID INT NOT NULL AUTO_INCREMENT,
-	PROV_nombre VARCHAR(50) NOT NULL,
-	PROV_DNI VARCHAR(50) NOT NULL,
-	PROV_telefono VARCHAR(20) NOT NULL,
-	PROV_email VARCHAR(50) NOT NULL,
-	PROV_direccion VARCHAR(50) NOT NULL,
-	PROV_web VARCHAR(50) NOT NULL,
-	PRIMARY KEY(PROV_ID)
+	ID INT NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL,
+	DNI VARCHAR(50) NOT NULL,
+	telefono VARCHAR(20) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	direccion VARCHAR(50) NOT NULL,
+	web VARCHAR(50) NOT NULL,
+	PRIMARY KEY(ID)
 );
 
 
 -- Estructura para la tabla `SUBCATEGORIA_PRODUCTO`
 CREATE TABLE IF NOT EXISTS `SUBCATEGORIA_PRODUCTO`(
-	SUB_ID INT NOT NULL AUTO_INCREMENT,
-	SUB_especieEdad VARCHAR(50) NOT NULL,
-	SUB_descripcion VARCHAR(140) NOT NULL,
-	PRIMARY KEY(SUB_ID)
+	ID INT NOT NULL AUTO_INCREMENT,
+	especieEdad VARCHAR(50) NOT NULL,
+	descripcion VARCHAR(140) NOT NULL,
+	PRIMARY KEY(ID)
 );
 
 
 -- Estructura para la tabla `PRODUCTO`
 CREATE TABLE IF NOT EXISTS `PRODUCTO`(
-	PROD_ID INT NOT NULL AUTO_INCREMENT,    
-	PROD_descripcion VARCHAR(140) NOT NULL,
-	PROD_IDCategoria INT NOT NULL,
-	PROD_IDSubcategoria INT NOT NULL,
-	PROD_precioUnitario DECIMAL(11,2) NOT NULL,
-	PROD_IDProveedor INT NOT NULL,
-	PRIMARY KEY(PROD_ID),
-	CONSTRAINT fk_id_categoria_producto FOREIGN KEY(PROD_IDCategoria) REFERENCES CATEGORIA_PRODUCTO(CAT_IDProducto) ON DELETE CASCADE,
-	CONSTRAINT fk_id_proveedor_producto FOREIGN KEY(PROD_IDProveedor) REFERENCES PROVEEDOR(PROV_ID) ON DELETE CASCADE,
-	CONSTRAINT fk_id_subcategoria_producto FOREIGN KEY(PROD_IDSubcategoria) REFERENCES SUBCATEGORIA_PRODUCTO(SUB_ID) ON DELETE CASCADE
+	ID INT NOT NULL AUTO_INCREMENT,    
+	descripcion VARCHAR(140) NOT NULL,
+	IDCategoria INT NOT NULL,
+	IDSubcategoria INT NOT NULL,
+	precioUnitario DECIMAL(11,2) NOT NULL,
+	IDProveedor INT NOT NULL,
+	PRIMARY KEY(ID),
+	CONSTRAINT fk_id_categoria_producto FOREIGN KEY(IDCategoria) REFERENCES CATEGORIA_PRODUCTO(IDProducto) ON DELETE CASCADE,
+	CONSTRAINT fk_id_proveedor_producto FOREIGN KEY(IDProveedor) REFERENCES PROVEEDOR(ID) ON DELETE CASCADE,
+	CONSTRAINT fk_id_subcategoria_producto FOREIGN KEY(IDSubcategoria) REFERENCES SUBCATEGORIA_PRODUCTO(ID) ON DELETE CASCADE
 );
 
 
 -- Estructura para la tabla `DETALLE_VENTA`
 CREATE TABLE IF NOT EXISTS `DETALLE_VENTA`(
-	DET_ID INT NOT NULL AUTO_INCREMENT,
-	DET_IDPedido INT NOT NULL,
-	DET_IDProducto INT NOT NULL,
-	DET_cantidad INT NOT NULL,
-	DET_subtotal DECIMAL(11,2) NOT NULL,
-	DET_recargo INT NOT NULL,
-	DET_total DECIMAL(11,2) NOT NULL,
-	PRIMARY KEY(DET_ID),
-	CONSTRAINT fk_id_pedido_d_venta FOREIGN KEY(DET_IDPedido) REFERENCES PEDIDO(PED_ID) ON DELETE CASCADE,
-	CONSTRAINT fk_id_producto_d_venta FOREIGN KEY(DET_IDProducto) REFERENCES PRODUCTO(PROD_ID) ON DELETE CASCADE
+	ID INT NOT NULL AUTO_INCREMENT,
+	IDPedido INT NOT NULL,
+	IDProducto INT NOT NULL,
+	cantidad INT NOT NULL,
+	subtotal DECIMAL(11,2) NOT NULL,
+	recargo INT NOT NULL,
+	total DECIMAL(11,2) NOT NULL,
+	PRIMARY KEY(ID),
+	CONSTRAINT fk_id_pedido_d_venta FOREIGN KEY(IDPedido) REFERENCES PEDIDO(ID) ON DELETE CASCADE,
+	CONSTRAINT fk_id_producto_d_venta FOREIGN KEY(IDProducto) REFERENCES PRODUCTO(ID) ON DELETE CASCADE
 );
 
 
 
 
 -- ***********************************************************************
--- * INICIO DE LA CREACION DE TABLAS DE AUDITORIA PARA LA BD `LIL_PET'S` *
+-- * Inicio de la creacion de tablas de AUDITORIA para la bd `LIL_PET'S` *
 -- ***********************************************************************
 
 -- CREACION DE LA TABLA "LOG_DETALLE_VENTA" DEL TRIGGER
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `log_precio_antiguo`
 
 
 -- *************************************************************
--- * INICIO DE LA CREACION DE FUNCIONES PARA LA BD `LIL_PET'S` *
+-- * Inicio de la creacion de FUNCIONES para la bd `LIL_PET'S` *
 -- *************************************************************
 
 DELIMITER $$
@@ -286,9 +286,9 @@ DETERMINISTIC
 BEGIN
 	DECLARE total DECIMAL(11,2);
 	SET total = (
-		SELECT PROD_precioUnitario * cantidad
+		SELECT precioUnitario * cantidad
 		FROM PRODUCTO
-		WHERE PROD_ID = producto
+		WHERE ID = producto
 	);
 	RETURN total;
 END$$
@@ -298,22 +298,24 @@ DELIMITER ;
 
 
 -- *************************************************************
--- * INICIO DE LA CREACION DE FUNCIONES PARA LA BD `LIL_PET'S` *
+-- * Inicio de la creacion de VISTAS para la bd `LIL_PET'S` *
 -- *************************************************************
 
 -- VISTA DE LOS PRODUCTOS MAS VENDIDOS
-CREATE OR REPLACE VIEW `mas_vendido_view` AS
+CREATE OR REPLACE VIEW `vendido_view` AS
 (
 	SELECT
-		d.DET_IDProducto AS item,
-		p.PROD_descripcion AS producto,
-		SUM(d.DET_cantidad) AS cantidad
+		d.IDProducto AS item,
+		p.descripcion AS producto,
+		SUM(d.cantidad) AS cantidad,
+        f_calcular_subtotal(p.ID,SUM(d.cantidad)) AS "total sin recargo",
+        f_calcular_recargo(f_calcular_subtotal(p.ID,SUM(d.cantidad)),d.recargo) AS "total con recargo"
 	FROM
 		DETALLE_VENTA AS d
 	JOIN
-		PRODUCTO AS p ON (p.PROD_ID = d.DET_IDProducto)
+		PRODUCTO AS p ON (p.ID = d.IDProducto)
 	GROUP BY
-		DET_IDPRODUCTO
+		IDPRODUCTO
 	ORDER BY
 		cantidad DESC
 	LIMIT 5
@@ -324,21 +326,21 @@ CREATE OR REPLACE VIEW `mas_vendido_view` AS
 CREATE OR REPLACE VIEW `productos_gatos_view` AS
 (
 	SELECT
-		p.PROD_descripcion AS item,
-		catpro.CAT_descripcion AS 'categoria producto',
-		a.SUB_especieEdad AS 'subcategoria producto',
-		f_concat_precio(p.PROD_precioUnitario) AS costo
+		p.descripcion AS item,
+		catpro.descripcion AS 'categoria producto',
+		a.especieEdad AS 'subcategoria producto',
+		f_concat_precio(p.precioUnitario) AS costo
 	FROM
 		PRODUCTO AS p
 	JOIN
-		CATEGORIA_PRODUCTO AS catpro ON (catpro.CAT_IDProducto = p.PROD_IDCategoria)
+		CATEGORIA_PRODUCTO AS catpro ON (catpro.IDProducto = p.IDCategoria)
 	JOIN
-		SUBCATEGORIA_PRODUCTO AS a ON (a.SUB_ID = p.PROD_IDSubcategoria)
+		SUBCATEGORIA_PRODUCTO AS a ON (a.ID = p.IDSubcategoria)
 	WHERE
-		a.SUB_especieEdad LIKE upper('%gat%')
+		a.especieEdad LIKE upper('%gat%')
 	ORDER BY
-		catpro.CAT_descripcion ASC,
-		a.SUB_especieEdad DESC
+		catpro.descripcion ASC,
+		a.especieEdad DESC
 );
 
 
@@ -346,22 +348,22 @@ CREATE OR REPLACE VIEW `productos_gatos_view` AS
 CREATE OR REPLACE VIEW `productos_perros_view` AS
 (
 	SELECT
-		p.PROD_descripcion AS item,
-		catpro.CAT_descripcion AS 'categoria producto',
-		a.SUB_especieEdad AS 'subcategoria producto',
-		f_concat_precio(p.PROD_precioUnitario) AS costo
+		p.descripcion AS item,
+		catpro.descripcion AS 'categoria producto',
+		a.especieEdad AS 'subcategoria producto',
+		f_concat_precio(p.precioUnitario) AS costo
 	FROM
 		PRODUCTO AS p
 	JOIN
-		SUBCATEGORIA_PRODUCTO AS a ON (a.SUB_ID = p.PROD_IDSubcategoria)
+		SUBCATEGORIA_PRODUCTO AS a ON (a.ID = p.IDSubcategoria)
 	JOIN
-		CATEGORIA_PRODUCTO AS catpro ON (catpro.CAT_IDProducto = p.PROD_IDCategoria)
+		CATEGORIA_PRODUCTO AS catpro ON (catpro.IDProducto = p.IDCategoria)
 	WHERE
-		a.SUB_especieEdad LIKE upper('%perr%')
-        OR a.SUB_especieEdad LIKE upper('%cach%')
+		a.especieEdad LIKE upper('%perr%')
+        OR a.especieEdad LIKE upper('%cach%')
 	ORDER BY
-		catpro.CAT_descripcion ASC,
-		a.SUB_especieEdad DESC
+		catpro.descripcion ASC,
+		a.especieEdad DESC
 );
 
 
@@ -369,13 +371,13 @@ CREATE OR REPLACE VIEW `productos_perros_view` AS
 CREATE OR REPLACE VIEW `cliente_mascotas_view` AS
 (
 	SELECT
-		f_concat_nombre_completo(c.CLI_nombre,c.CLI_apellido) AS nombre_completo_cliente,
-		m.MAS_nombre AS nombre_mascota,
-		m.MAS_especie AS especie       
+		f_concat_nombre_completo(c.nombre,c.apellido) AS "nombre completo cliente",
+		m.nombre AS mascota,
+		m.especie AS especie
 	FROM
 		CLIENTE AS c
 	JOIN
-		MASCOTA AS m ON(c.CLI_ID = m.MAS_IDCliente)
+		MASCOTA as m ON (c.ID = m.IDCliente)
 );
 
 
@@ -383,73 +385,73 @@ CREATE OR REPLACE VIEW `cliente_mascotas_view` AS
 CREATE OR REPLACE VIEW `top10_clientes_view` AS
 (
 	SELECT
-		c.CLI_ID AS ID,
-		f_concat_nombre_completo(c.CLI_nombre,c.CLI_apellido) AS nombre_completo,
-		COUNT(p.PED_IDCliente) AS compras_realizadas
+		c.ID AS ID,
+		f_concat_nombre_completo(c.nombre,c.apellido) AS "nombre completo cliente",
+		COUNT(p.IDCliente) AS compras_realizadas
 	FROM
 		CLIENTE AS c
 	JOIN
-		PEDIDO AS p ON (c.CLI_ID = p.PED_IDCliente)
+		PEDIDO AS p ON (c.ID = p.IDCliente)
 	GROUP BY
-		p.PED_IDCliente
+		p.IDCliente
 	ORDER BY
 		compras_realizadas DESC
 	LIMIT 10
 );
 
 
--- VISTA CON MULTIPLE JOIN'S DE LA TABLA `PRODUCTO`, DONDE SE REEMPLAZAN LAS FK POR SU NOMBRE/DESCRIPCION DE TABLAS RELACIONADAS
+-- VISTA CON MULTIPLE JOIN'S DE LA TABLA `PRODUCTO`
 CREATE OR REPLACE VIEW `productos_view` AS
 (
 	SELECT
-		p.PROD_ID as item,
-		p.PROD_descripcion AS descripcion,
-		c.CAT_descripcion AS categoria,
-		a.SUB_especieEdad AS para,
-		f_concat_precio(p.PROD_precioUnitario) AS costo,
-		pr.PROV_nombre AS proveedor        
+		p.ID as item,
+		p.descripcion AS descripcion,
+		c.descripcion AS categoria,
+		a.especieEdad AS para,
+		f_concat_precio(p.precioUnitario) AS costo,
+		pr.nombre AS proveedor        
 	FROM
 		PRODUCTO AS p
 	JOIN
-		CATEGORIA_PRODUCTO AS c ON (p.PROD_IDCategoria = c.CAT_IDProducto)
+		CATEGORIA_PRODUCTO AS c ON (p.IDCategoria = c.IDProducto)
 	JOIN
-		PROVEEDOR AS pr ON (p.PROD_IDProveedor = pr.PROV_ID)
+		PROVEEDOR AS pr ON (p.IDProveedor = pr.ID)
 	JOIN
-		SUBCATEGORIA_PRODUCTO AS a ON (p.PROD_IDSubcategoria = a.SUB_ID)
+		SUBCATEGORIA_PRODUCTO AS a ON (p.IDSubcategoria = a.ID)
 	WHERE
-		p.PROD_ID
+		p.ID
 	ORDER BY
-		p.PROD_ID ASC
+		p.ID ASC
 );
 
 
--- VISTA CON MULTIPLES JOIN'S, DETALLA LOS SERVICIOS SOLICITADOS
--- ADICIONANDO INFORMACION ESCALADA DE TABLAS RELACIONADAS UNA CON OTRAS
+-- VISTA CON MULTIPLES JOIN'S DE LOS SERVICIOS SOLICITADOS
 CREATE OR REPLACE VIEW `servicios_solicitados_view` AS
 (
 	SELECT
-		SOL_ID AS id,
-		SER_servicio AS servis,
-		f_concat_precio(SER_costo) AS precio,
-		MAS_nombre AS mascota,
-		MAS_raza AS raza,
-		f_concat_nombre_completo(CLI_nombre,CLI_apellido) AS cliente,
-		f_concat_nombre_completo(EMP_nombre,EMP_apellido) AS empleado,
-		CAT_descripcion AS categoria_empleado,
-		SOL_fechahora AS fecha_hora,
-		SER_descripcion AS descripcion
+		soli.ID AS "id solicitud",
+		serv.servicio AS servis,
+        serv.ID AS "id servicio",
+		serv.costo AS precio,
+		m.nombre AS mascota,
+		m.raza AS raza,
+		f_concat_nombre_completo(c.nombre,c.apellido) AS cliente,
+		f_concat_nombre_completo(e.nombre,e.apellido) AS empleado,
+		cat.descripcion AS categoria_empleado,
+		soli.fechahora AS fecha_hora,
+		serv.descripcion AS descripcion
 	FROM
-		SERVICIO_SOLICITADO
+		SERVICIO_SOLICITADO AS soli
 	JOIN
-		MASCOTA ON (MAS_ID = SOL_IDMascota)
+		MASCOTA AS m ON (m.ID = soli.IDMascota)
 	JOIN
-		SERVICIO ON (SER_ID = SOL_IDServicio)
+		SERVICIO AS serv ON (serv.ID = soli.IDServicio)
 	JOIN
-		EMPLEADO ON (EMP_ID = SOL_IDEmpleado)
+		EMPLEADO AS e ON (e.ID = soli.IDEmpleado)
 	JOIN
-		CLIENTE ON (CLI_ID = MAS_IDCliente)
+		CLIENTE AS c ON (c.ID = m.IDCliente)
 	JOIN
-		CATEGORIA_EMPLEADO ON (EMP_IDCategoria = CAT_IDEmpleado)
+		CATEGORIA_EMPLEADO AS cat ON (e.IDCategoria = cat.IDEmpleado)
 );
 
 
@@ -457,34 +459,33 @@ CREATE OR REPLACE VIEW `servicios_solicitados_view` AS
 CREATE OR REPLACE VIEW `servicios_mas_solicitados_view` AS
 (
 	SELECT
-		serv.SER_ID AS ID,
-		serv.SER_servicio AS Servis,
-		COUNT(soli.SOL_IDServicio) AS cantidad
+		serv.ID AS ID,
+		serv.servicio AS Servis,
+		COUNT(soli.IDServicio) AS cantidad
 	FROM
 		SERVICIO AS serv
 	JOIN
-		SERVICIO_SOLICITADO AS soli ON (soli.SOL_IDServicio = serv.SER_ID)
+		SERVICIO_SOLICITADO AS soli ON (soli.IDServicio = serv.ID)
 	GROUP BY
-		soli.SOL_IDServicio
+		soli.IDServicio
 	ORDER BY
 		cantidad DESC
 	LIMIT 5
 );
 
 
--- VISTA DE LA GANANCIA MENSUAL DE VENTAS DEL AÑO 2022
+-- VISTA DE LA GANANCIA MENSUAL DE PRODUCTOS VENDIDOS DURANTE EL AÑO 2022
 CREATE OR REPLACE VIEW `ganancias_x_mes_view` AS
 (
 	SELECT
-		d.DET_IDPedido AS IDPEDIDO,
-		MONTHNAME(p.PED_fechahora) AS mes,
-		SUM(d.DET_total - d.DET_subtotal) AS ganancia
+		MONTHNAME(p.fechahora) AS mes,
+		SUM(d.total - d.subtotal) AS ganancia
 	FROM
 		PEDIDO AS p
 	JOIN
-		DETALLE_VENTA AS d ON (d.DET_IDPedido = p.PED_ID)
+		DETALLE_VENTA AS d ON (d.IDPedido = p.ID)
 	WHERE
-		YEAR(p.PED_fechahora) = '2022'
+		YEAR(p.fechahora) = '2022'
 	GROUP BY
 		mes
 	ORDER BY
@@ -496,15 +497,15 @@ CREATE OR REPLACE VIEW `ganancias_x_mes_view` AS
 CREATE OR REPLACE VIEW `ganancia_servicios_view` AS
 (
 	SELECT
-		MONTHNAME(soli.SOL_fechahora) as mes,
-		SUM(serv.SER_costo) AS ganancia,
-		COUNT(soli.SOL_IDServicio) AS 'cantidad solicitados'
+		MONTHNAME(soli.fechahora) AS mes,
+		SUM(serv.costo) AS ganancia,
+		COUNT(soli.IDServicio) AS 'cantidad solicitados'
 	FROM
 		SERVICIO AS serv
 	JOIN
-		SERVICIO_SOLICITADO AS soli ON (soli.SOL_IDServicio = serv.SER_ID)
+		SERVICIO_SOLICITADO AS soli ON (soli.IDServicio = serv.ID)
 	WHERE
-		YEAR(soli.SOL_fechahora) = '2022'
+		YEAR(soli.fechahora) = '2022'
 	GROUP BY
 		mes
 	ORDER BY
@@ -514,7 +515,7 @@ CREATE OR REPLACE VIEW `ganancia_servicios_view` AS
 
 
 -- *********************************************************************
--- * INICIO DE LA CREACION DE STORED PROCEDURES PARA LA BD `LIL_PET'S` *
+-- * Inicio de la creacion de STORED PROCEDURES para la bd `LIL_PET'S` *
 -- *********************************************************************
 
 DELIMITER $$
@@ -546,11 +547,11 @@ END$$
 DROP PROCEDURE IF EXISTS `sp_insert_new_client`$$
 
 -- SP para insertar datos de un nuevo cliente
-CREATE PROCEDURE `sp_insert_new_client` (IN sp_CLI_ID INT, IN sp_CLI_nombre VARCHAR(50), IN sp_CLI_apellido VARCHAR(50), IN sp_CLI_DNI VARCHAR(50), IN sp_CLI_domicilio VARCHAR(50),  IN sp_CLI_telefono VARCHAR(20),  IN sp_CLI_email VARCHAR(50))
+CREATE PROCEDURE `sp_insert_new_client` (IN sp_ID INT, IN sp_nombre VARCHAR(50), IN sp_apellido VARCHAR(50), IN sp_DNI VARCHAR(50), IN sp_domicilio VARCHAR(50),  IN sp_telefono VARCHAR(20),  IN sp_email VARCHAR(50))
 BEGIN
-	INSERT INTO `CLIENTE` (CLI_ID, CLI_nombre, CLI_apellido, CLI_DNI, CLI_domicilio, CLI_telefono, CLI_email)
+	INSERT INTO `CLIENTE` (ID, nombre, apellido, DNI, domicilio, telefono, email)
 		VALUES
-			(sp_CLI_ID, sp_CLI_nombre, sp_CLI_apellido, sp_CLI_DNI, sp_CLI_domicilio, sp_CLI_telefono, sp_CLI_email);
+			(sp_ID, sp_nombre, sp_apellido, sp_DNI, sp_domicilio, sp_telefono, sp_email);
 END$$
 
 
@@ -558,19 +559,19 @@ END$$
 DROP PROCEDURE IF EXISTS `sp_delete_client`$$
 
 -- SP para eliminar un cliente de los registros
-CREATE PROCEDURE `sp_delete_client` (IN sp_CLI_ID INT)
+CREATE PROCEDURE `sp_delete_client` (IN sp_ID INT)
 BEGIN
 	DELETE
 	FROM
 		CLIENTE
 	WHERE
-		CLI_ID = sp_CLI_ID;
+		ID = sp_ID;
 END$$
 
 
 
 -- *************************************************************************
--- * INICIO DE LA CREACION DE TRIGGERS DE AUDITORIA PARA LA BD `LIL_PET'S` *
+-- * Inicio de la creacion de TRIGGERS para la bd `LIL_PET'S` *
 -- *************************************************************************
 
 DROP TRIGGER IF EXISTS `tr_detalle_venta`$$
@@ -582,7 +583,7 @@ FOR EACH ROW
 BEGIN
 	INSERT INTO `log_detalle_venta`
 		VALUES
-		('Nueva venta',NEW.DET_ID, NEW.DET_IDPedido, NEW.DET_Subtotal, NEW.DET_recargo, NEW.DET_total, SESSION_USER(), CURRENT_TIMESTAMP());
+		('Nueva venta',NEW.ID, NEW.IDPedido, NEW.Subtotal, NEW.recargo, NEW.total, SESSION_USER(), CURRENT_TIMESTAMP());
 END$$
 
 
@@ -596,7 +597,7 @@ FOR EACH ROW
 BEGIN
 	INSERT INTO `log_servicio_solicitados`
 		VALUES
-		('Servicio solicitado',NEW.SOL_ID, NEW.SOL_IDServicio, NEW.SOL_IDMascota, NEW.SOL_IDEmpleado, NEW.SOL_fechahora, SESSION_USER(), CURRENT_TIMESTAMP());
+		('Servicio solicitado',NEW.ID, NEW.IDServicio, NEW.IDMascota, NEW.IDEmpleado, NEW.fechahora, SESSION_USER(), CURRENT_TIMESTAMP());
 END$$
 
 
@@ -610,21 +611,20 @@ FOR EACH ROW
 BEGIN
 	INSERT INTO `log_precio_antiguo`
 		VALUES
-		('Producto modificado',OLD.PROD_ID, OLD.PROD_IDCategoria, OLD.PROD_precioUnitario, SESSION_USER(), CURRENT_TIMESTAMP());
+		('Producto modificado',OLD.ID, OLD.IDCategoria, OLD.precioUnitario, SESSION_USER(), CURRENT_TIMESTAMP());
 END$$
 
 DELIMITER ;
 
 
-/*
+
 -- SANDBOX:
 -- LLAMADA AL SP `sp_insert_new_client` PARA INGRESAR UN NUEVO CLIENTE
 
-call lil_pets.sp_insert_new_client(NULL, 'josesito', 'carmelo', '32.123.212', 'spridfield', '422-123-1123', 'none@gmail.com');
-SELECT * FROM CLIENTE;
+-- call lil_pets.sp_insert_new_client(NULL, 'josesito', 'carmelo', '32.123.212', 'spridfield', '422-123-1123', 'none@gmail.com');
+-- SELECT * FROM CLIENTE;
 
 -- LLAMADA AL SP `sp_delete_client` PARA LA ELIMINACION DE UN CLIENTE EXISTENTE
 
-call lil_pets.sp_delete_client(11);
-SELECT * FROM CLIENTE;
-*/
+-- call lil_pets.sp_delete_client(11);
+-- SELECT * FROM CLIENTE;

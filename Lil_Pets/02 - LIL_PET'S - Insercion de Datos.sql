@@ -240,26 +240,26 @@ INSERT INTO `PRODUCTO`
 -- Estructura para insertar registros en `DETALLE_VENTA`
 INSERT INTO `DETALLE_VENTA`
 	VALUES
-		(1,1,1,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(2,1,6,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(3,1,16,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(4,1,17,5,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(5,2,2,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(6,3,9,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(7,4,14,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(8,5,6,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(9,5,2,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(10,6,4,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(11,7,8,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(12,7,12,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(13,8,1,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(14,9,3,1,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(15,9,5,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(16,10,4,2,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(17,11,8,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(18,11,9,4,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(19,11,1,4,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo)),
-		(20,12,3,3,f_calcular_subtotal(DET_IDProducto,DET_cantidad),35,f_calcular_recargo(DET_subtotal,DET_recargo));
+		(1,1,1,3,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(2,1,6,2,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(3,1,16,1,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(4,1,17,5,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(5,2,2,3,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(6,3,9,2,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(7,4,14,3,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(8,5,6,1,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(9,5,2,2,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(10,6,4,3,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(11,7,8,1,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(12,7,12,2,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(13,8,1,1,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(14,9,3,1,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(15,9,5,2,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(16,10,4,2,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(17,11,8,3,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(18,11,9,4,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(19,11,1,4,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo)),
+		(20,12,3,3,f_calcular_subtotal(IDProducto,cantidad),35,f_calcular_recargo(subtotal,recargo));
 
 
 
